@@ -12,7 +12,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Main Stylesheet -->
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -401,7 +404,7 @@
           </div>
 
           <div class="about-action">
-            <a href="#menu-section" class="btn btn-primary"><i class="fa-solid fa-bag-shopping"></i> Order Your Meal</a>
+            <a href="store.html" class="btn btn-primary"><i class="fa-solid fa-bag-shopping"></i> Order Your Meal</a>
             <div class="chef-signature">
               <span>Master Chef Certified</span>
               <strong>Chef Anu & Team</strong>
@@ -652,7 +655,8 @@
         <h4>Quick Links</h4>
         <ul>
           <li><a href="#hero">Home</a></li>
-          <li><a href="#menu-section">Menu & Specials</a></li>
+          <li><a href="#signature">Signature Specialties</a></li>
+          <li><a href="store.html">Cloud Kitchen Store</a></li>
           <li><a href="#about">Our Culinary Heritage</a></li>
           <li><a href="#reviews">Amazon-style Reviews</a></li>
           <li><a href="#contact">Contact & Location</a></li>
@@ -662,11 +666,11 @@
       <div class="footer-links-col">
         <h4>Top Non-Veg Picks</h4>
         <ul>
-          <li><a href="#menu-section" class="quick-filter-link" data-item="dum-biryani">Hyderabadi Dum Biryani</a></li>
-          <li><a href="#menu-section" class="quick-filter-link" data-item="mutton">Mutton Rogan Josh</a></li>
-          <li><a href="#menu-section" class="quick-filter-link" data-item="tandoori">Tandoori Murgh Full</a></li>
-          <li><a href="#menu-section" class="quick-filter-link" data-item="prawns">Prawns Ghee Roast</a></li>
-          <li><a href="#menu-section" class="quick-filter-link" data-item="butter-chicken">Royal Butter Chicken</a></li>
+          <li><a href="product.html?id=anu-001">Hyderabadi Dum Biryani</a></li>
+          <li><a href="product.html?id=anu-003">Mutton Rogan Josh</a></li>
+          <li><a href="product.html?id=anu-002">Tandoori Murgh Full</a></li>
+          <li><a href="product.html?id=anu-006">Prawns Ghee Roast</a></li>
+          <li><a href="product.html?id=anu-004">Royal Butter Chicken</a></li>
         </ul>
       </div>
 
@@ -891,218 +895,15 @@
     </div>
   </div>
 
-  <!-- Full Admin Portal Modal -->
-  <div class="modal admin-modal" id="adminModal" role="dialog" aria-modal="true">
-    <div class="modal-card admin-modal-card">
-      <div class="admin-modal-header">
-        <div class="admin-header-title">
-          <div class="admin-badge"><i class="fa-solid fa-shield-halved"></i> HOTEL MANAGER</div>
-          <h2>Anu Food Point — Store Owner Portal</h2>
-          <p>Live inventory management, item creator, and customer order monitoring</p>
-        </div>
-        <button class="modal-close-btn" id="closeAdminBtn"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-
-      <!-- Admin Tab Switchers -->
-      <div class="admin-tabs">
-        <button class="admin-tab active" data-tab="menu-mgr"><i class="fa-solid fa-bowl-food"></i> Menu Items (<span id="adminTotalItems">0</span>)</button>
-        <button class="admin-tab" data-tab="add-item"><i class="fa-solid fa-plus-circle"></i> Add New Product</button>
-        <button class="admin-tab" data-tab="orders-mgr"><i class="fa-solid fa-receipt"></i> Incoming Orders (<span id="adminOrdersCount">0</span>)</button>
-        <button class="admin-tab" data-tab="analytics"><i class="fa-solid fa-chart-line"></i> Store Analytics</button>
-      </div>
-
-      <!-- Tab 1: Menu Items List & Management -->
-      <div class="admin-tab-content active" id="tab-menu-mgr">
-        <div class="admin-table-toolbar">
-          <input type="text" id="adminItemSearch" placeholder="Search dish in inventory...">
-          <button class="btn btn-sm btn-primary" id="adminGoToAddBtn"><i class="fa-solid fa-plus"></i> New Dish</button>
-          <button class="btn btn-sm btn-outline" id="adminResetMenuBtn" title="Reset to authentic default menu"><i class="fa-solid fa-rotate-left"></i> Reset Defaults</button>
-        </div>
-
-        <div class="admin-table-wrap">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Category</th>
-                <th>Diet</th>
-                <th>Price</th>
-                <th>Spice</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adminItemsTableBody">
-              <!-- Rendered dynamically -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Tab 2: Add New Product Form -->
-      <div class="admin-tab-content" id="tab-add-item">
-        <form id="adminAddProductForm" class="admin-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="prodName">Dish Name *</label>
-              <input type="text" id="prodName" required placeholder="e.g. Royal Mutton Seekh Kebab">
-            </div>
-            <div class="form-group">
-              <label for="prodCategory">Category *</label>
-              <select id="prodCategory" required>
-                <option value="biryani">Biryani & Rice</option>
-                <option value="starters">Tandoor & Starters</option>
-                <option value="curries">Royal Curries</option>
-                <option value="seafood">Seafood Specials</option>
-                <option value="breads">Breads & Sides</option>
-                <option value="desserts">Desserts & Drinks</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="prodPrice">Price (₹) *</label>
-              <input type="number" id="prodPrice" required min="10" placeholder="e.g. 320">
-            </div>
-            <div class="form-group">
-              <label for="prodOrigPrice">Original Price (₹)</label>
-              <input type="number" id="prodOrigPrice" min="10" placeholder="e.g. 380 (for discount strike)">
-            </div>
-            <div class="form-group">
-              <label for="prodDiet">Dietary Type *</label>
-              <select id="prodDiet" required>
-                <option value="non-veg">🔴 Non-Veg Special</option>
-                <option value="veg">🟢 Pure Veg</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="prodBadge">Special Badge</label>
-              <select id="prodBadge">
-                <option value="">None</option>
-                <option value="Chef's Special">Chef's Special</option>
-                <option value="Bestseller">Bestseller</option>
-                <option value="Royal Classic">Royal Classic</option>
-                <option value="Weekend Special">Weekend Special</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="prodSpice">Spice Level</label>
-              <select id="prodSpice">
-                <option value="Mild">Mild 🌿</option>
-                <option value="Medium">Medium 🌶️</option>
-                <option value="Spicy">Hot & Fiery 🌶️🌶️</option>
-                <option value="Extra Spicy">Extra Fiery 🌶️🌶️🌶️</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="prodServing">Serving Size</label>
-              <input type="text" id="prodServing" placeholder="e.g. Serves 1-2 (450g)">
-            </div>
-          </div>
-
-          <!-- Image Selector & Presets -->
-          <div class="form-group">
-            <label for="prodImage">Image URL (Or click one of the appetizing presets below):</label>
-            <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/...">
-            
-            <div class="image-presets-strip">
-              <span class="preset-label">Quick Presets:</span>
-              <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80">Dum Biryani</button>
-              <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1697155406147-7d640cbba0e7?w=800&auto=format&fit=crop&q=80">Tandoori Chicken</button>
-              <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800&auto=format&fit=crop&q=80">Butter Chicken</button>
-              <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80">Mutton Gravy</button>
-              <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop&q=80">Grilled Kebab</button>
-              <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&auto=format&fit=crop&q=80">Tawa Masala</button>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="prodDescription">Dish Culinary Story & Description *</label>
-            <textarea id="prodDescription" rows="3" required placeholder="Describe the aroma, tender cuts, cooking method, and taste profile..."></textarea>
-          </div>
-
-          <div class="admin-form-actions">
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save & Publish Item to Menu</button>
-            <button type="reset" class="btn btn-outline">Clear Form</button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Tab 3: Incoming Orders Management -->
-      <div class="admin-tab-content" id="tab-orders-mgr">
-        <div class="admin-orders-controls">
-          <p>Orders placed by online visitors appear here live with instant status controls.</p>
-          <button class="btn btn-sm btn-outline" id="clearAllOrdersBtn"><i class="fa-regular fa-trash-can"></i> Clear Order History</button>
-        </div>
-
-        <div class="admin-orders-list" id="adminOrdersList">
-          <!-- Rendered dynamically -->
-        </div>
-      </div>
-
-      <!-- Tab 4: Store Analytics -->
-      <div class="admin-tab-content" id="tab-analytics">
-        <div class="analytics-metrics-grid">
-          <div class="metric-card">
-            <span class="m-title">Total Orders</span>
-            <span class="m-val" id="metricTotalOrders">0</span>
-            <span class="m-sub">Simulated online checkouts</span>
-          </div>
-          <div class="metric-card">
-            <span class="m-title">Gross Revenue</span>
-            <span class="m-val text-gradient" id="metricRevenue">₹0</span>
-            <span class="m-sub">Total sales generated</span>
-          </div>
-          <div class="metric-card">
-            <span class="m-title">Total Dishes in Menu</span>
-            <span class="m-val" id="metricTotalDishes">0</span>
-            <span class="m-sub">Non-veg & Veg combined</span>
-          </div>
-          <div class="metric-card">
-            <span class="m-title">Customer Satisfaction</span>
-            <span class="m-val text-gold">4.9 ★</span>
-            <span class="m-sub">Verified Amazon-style reviews</span>
-          </div>
-        </div>
-
-        <div class="analytics-breakdown">
-          <h3>Popular Selling Categories</h3>
-          <div class="category-bars">
-            <div class="cat-bar-item">
-              <span>🍗 Royal Dum Biryanis (62%)</span>
-              <div class="cat-bar-bg"><div class="cat-bar-fill" style="width: 62%;"></div></div>
-            </div>
-            <div class="cat-bar-item">
-              <span>🔥 Tandoor & Starters (22%)</span>
-              <div class="cat-bar-bg"><div class="cat-bar-fill" style="width: 22%;"></div></div>
-            </div>
-            <div class="cat-bar-item">
-              <span>🍲 Royal Curries & Gravies (11%)</span>
-              <div class="cat-bar-bg"><div class="cat-bar-fill" style="width: 11%;"></div></div>
-            </div>
-            <div class="cat-bar-item">
-              <span>🦐 Seafood & Sides (5%)</span>
-              <div class="cat-bar-bg"><div class="cat-bar-fill" style="width: 5%;"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Bottom Floating Navigation for Mobile -->
   <div class="mobile-bottom-nav">
     <a href="#hero" class="mob-bottom-item active">
       <i class="fa-solid fa-house"></i>
       <span>Home</span>
     </a>
-    <a href="#menu-section" class="mob-bottom-item">
-      <i class="fa-solid fa-utensils"></i>
-      <span>Menu</span>
+    <a href="store.html" class="mob-bottom-item">
+      <i class="fa-solid fa-store"></i>
+      <span>Store</span>
     </a>
     <button class="mob-bottom-item mob-cart-trigger" id="mobBottomCartBtn">
       <div class="icon-wrap">
