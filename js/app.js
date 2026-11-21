@@ -84,6 +84,11 @@ const AppController = {
 
     // Hero buttons
     this.heroReviewsBtn = document.getElementById("heroReviewsBtn");
+
+    // Amazon Product Details Modal
+    this.productModal = document.getElementById("productModal");
+    this.closeProductModalBtn = document.getElementById("closeProductModalBtn");
+    this.modalProductContent = document.getElementById("modalProductContent");
   },
 
   bindEvents() {
@@ -247,6 +252,31 @@ const AppController = {
         if (revElem) revElem.scrollIntoView({ behavior: "smooth" });
       });
     }
+
+    // Amazon Product Details Modal Close
+    if (this.closeProductModalBtn) {
+      this.closeProductModalBtn.addEventListener("click", () => this.closeProductModal());
+    }
+
+    // Backdrop click handles closing modals
+    if (this.backdrop) {
+      this.backdrop.addEventListener("click", () => {
+        this.closeProductModal();
+        this.closeMobileDrawer();
+        this.closeCart();
+        this.closeCheckout();
+      });
+    }
+
+    // ESC key closes any open modal or drawer
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        this.closeProductModal();
+        this.closeMobileDrawer();
+        this.closeCart();
+        this.closeCheckout();
+      }
+    });
   },
 
   initMobileNav() {
@@ -367,8 +397,8 @@ const AppController = {
           
           <!-- FRONT FACE -->
           <div class="card-face card-face-front">
-            <div class="card-image-wrap">
-              <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800'">
+            <div class="card-image-wrap" data-id="${item.id}" title="Click to open Amazon-style details & ingredients">
+              <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&auto=format&fit=crop&q=80'">
               
               <!-- Dietary Indicator (Veg/Non-Veg dot) -->
               <div class="diet-indicator ${isNonVeg ? 'non-veg' : 'veg'}" title="${isNonVeg ? 'Non-Vegetarian' : 'Pure Vegetarian'}">
@@ -390,8 +420,15 @@ const AppController = {
                 </div>
               </div>
 
-              <h3 class="card-title">${item.name}</h3>
+              <h3 class="card-title" data-id="${item.id}" title="Click to view full recipe & ingredients">${item.name}</h3>
               <p class="card-short-desc">${item.description}</p>
+
+              <!-- Purity Molecules Strip -->
+              <div class="card-molecules-strip" data-id="${item.id}" title="Click to inspect ingredient purity molecules">
+                <span class="card-mol-tag"><i class="fa-solid fa-leaf"></i> No Preservatives</span>
+                <span class="card-mol-tag"><i class="fa-solid fa-certificate"></i> 100% Halal</span>
+                <span class="card-mol-tag"><i class="fa-solid fa-droplet-slash"></i> No Colors</span>
+              </div>
 
               <div class="card-price-serving-row">
                 <div class="price-group">
@@ -403,9 +440,15 @@ const AppController = {
               </div>
 
               <div class="card-actions-row">
-                <button type="button" class="btn-flip-trigger" data-id="${item.id}" title="Click to view genuine guest reviews & preparation notes">
-                  <i class="fa-solid fa-rotate"></i> Flip Details
+                <a href="product.html?id=${item.id}" class="btn-inspect-modal" data-id="${item.id}" title="Inspect full ingredients, purity molecules, and Amazon verified reviews" style="text-decoration:none;">
+                  <i class="fa-solid fa-sparkles"></i> Details & Ingredients
+                </a>
+                <button type="button" class="btn-flip-trigger" data-id="${item.id}" title="Quick Story Flip">
+                  <i class="fa-solid fa-rotate"></i> Flip
                 </button>
+              </div>
+
+              <div class="card-actions-bottom-row">
                 <button type="button" class="btn-add-cart" data-id="${item.id}" ${item.active === false ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
                   <i class="fa-solid fa-bag-shopping"></i> ${item.active === false ? 'Out of Stock' : '+ Add to Cart'}
                 </button>
@@ -413,7 +456,7 @@ const AppController = {
             </div>
           </div>
 
-          <!-- BACK FACE (FLIP DETAILS & AMAZON-STYLE REVIEWS) -->
+          <!-- BACK FACE (FLIP DETAILS & QUICK REVIEWS) -->
           <div class="card-face card-face-back">
             <div class="back-header">
               <h4><i class="fa-solid fa-certificate"></i> Culinary Story & Reviews</h4>
@@ -438,6 +481,13 @@ const AppController = {
                   <strong><i class="fa-solid fa-fire-burner"></i> Calorie Metric:</strong>
                   <span>${item.calories || '550 kcal'}</span>
                 </div>
+              </div>
+
+              <!-- Open Full Amazon Page Link -->
+              <div style="margin: 0.85rem 0;">
+                <a href="product.html?id=${item.id}" class="btn-inspect-modal" style="width: 100%; text-decoration: none;">
+                  <i class="fa-solid fa-expand"></i> Open Full Amazon Product View
+                </a>
               </div>
 
               <!-- Amazon-Style Verified Reviews -->
@@ -479,6 +529,17 @@ const AppController = {
   },
 
   attachCardEventListeners() {
+    // Navigate to Amazon Product Page on clicking dish card / image / title
+    document.querySelectorAll(".card-image-wrap, .card-title, .card-molecules-strip").forEach(el => {
+      el.addEventListener("click", (e) => {
+        if (e.target.closest(".diet-indicator") || e.target.closest(".card-badge-tag") || e.target.closest(".btn-add-cart") || e.target.closest(".btn-flip-trigger") || e.target.closest(".btn-flip-back")) return;
+        const id = el.getAttribute("data-id") || (el.closest(".product-card-container") ? el.closest(".product-card-container").getAttribute("id").replace("card-", "") : null);
+        if (id) {
+          window.location.href = `product.html?id=${id}`;
+        }
+      });
+    });
+
     // Flip buttons (Front face)
     document.querySelectorAll(".btn-flip-trigger").forEach(btn => {
       btn.addEventListener("click", (e) => {
@@ -511,6 +572,349 @@ const AppController = {
         this.addToCart(id);
       });
     });
+  },
+
+  /* ==========================================================================
+     Amazon-Inspired Product Details & Ingredients Modal
+     ========================================================================== */
+  openProductModal(productId) {
+    const item = this.products.find(p => p.id === productId);
+    if (!item || !this.modalProductContent) return;
+
+    const isNonVeg = item.diet === "non-veg";
+    const discount = item.origPrice && item.origPrice > item.price 
+      ? Math.round(((item.origPrice - item.price) / item.origPrice) * 100) 
+      : 0;
+
+    const molecules = item.molecules || [
+      { icon: "fa-leaf", title: "No Preservatives", desc: "100% whole spices with zero artificial preservatives or synthetic chemicals." },
+      { icon: "fa-certificate", title: "100% Halal Prime Cut", desc: "Certified daily cuts prepared fresh in sanitized hotel kitchens." },
+      { icon: "fa-droplet-slash", title: "Zero Artificial Colors", desc: "Pure Kashmiri saffron and natural spice extract only." },
+      { icon: "fa-fire-burner", title: "Slow Dum Handi", desc: "Traditional clay handi sealed slow cooking." },
+      { icon: "fa-bottle-droplet", title: "Pure Cow Desi Ghee", desc: "Aromatic bilona cow ghee for unforgettable taste and lightness." },
+      { icon: "fa-shield-halved", title: "Cooked Fresh to Order", desc: "Prepared in small batches and delivered hot within 30 minutes." }
+    ];
+
+    const ingredients = item.ingredients || [
+      "2-Year Aged Daawat Basmati Rice",
+      "Farm Fresh Halal Poultry / Meat",
+      "Kashmiri Saffron (Grade 1)",
+      "Pure Cow Bilona Ghee",
+      "Golden Crispy Fried Onions (Birista)",
+      "Fresh Garden Mint & Coriander",
+      "Whole Star Anise & Cloves",
+      "Stone-Ground Royal Garam Masala"
+    ];
+
+    const reviews = item.amazonReviews && item.amazonReviews.length > 0
+      ? item.amazonReviews
+      : [
+          {
+            user: "Rohit Deshmukh",
+            verified: true,
+            rating: 5,
+            date: "3 days ago",
+            comment: "Unbelievable aroma the moment I unsealed the box! Distinct rice grains, juicy large chicken cuts with authentic saffron dum flavor. Far better than typical commercial biryani chains.",
+            helpful: 124
+          },
+          {
+            user: "Ananya Iyer",
+            verified: true,
+            rating: 5,
+            date: "Last week",
+            comment: "The chicken was soft, succulent, and well spiced without being oily. The Salan provided was rich with sesame and peanut paste. A 10/10 hotel biryani experience.",
+            helpful: 89
+          }
+        ];
+
+    let currentQty = 1;
+
+    this.modalProductContent.innerHTML = `
+      <div class="amazon-sheet-container">
+        <!-- Top Navigation Bar & Amazon Badge -->
+        <div class="amazon-top-bar">
+          <nav class="amazon-breadcrumb">
+            <a href="#menu-section" class="bc-link" id="modalBcMenu">Menu</a>
+            <span class="bc-sep">›</span>
+            <span class="bc-cat">${(item.category || "specials").toUpperCase()}</span>
+            <span class="bc-sep">›</span>
+            <span class="bc-active">${item.name}</span>
+          </nav>
+          ${item.amazonChoice ? `<span class="amazon-choice-pill"><i class="fa-solid fa-award"></i> ${item.amazonChoice}</span>` : `<span class="amazon-choice-pill"><i class="fa-solid fa-crown"></i> Chef's Gold Choice</span>`}
+        </div>
+
+        <div class="amazon-sheet-body">
+          <!-- Left Visual & Purity Molecules Column -->
+          <div class="amazon-media-col">
+            <div class="amazon-photo-frame">
+              <img src="${item.image}" alt="${item.name}" class="amazon-main-photo" onerror="this.src='https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&auto=format&fit=crop&q=80'">
+              <div class="diet-indicator ${isNonVeg ? 'non-veg' : 'veg'}" title="${isNonVeg ? 'Non-Vegetarian' : 'Pure Vegetarian'}">
+                <div class="diet-circle"></div>
+              </div>
+              ${item.badge ? `<span class="photo-badge">${item.badge}</span>` : ''}
+            </div>
+
+            <!-- Purity & Quality Molecules Section -->
+            <div class="amazon-molecules-section">
+              <div class="section-title-wrap">
+                <h4><i class="fa-solid fa-dna" style="color:var(--gold-accent);"></i> Purity & Ingredient Molecules</h4>
+                <span class="purity-verified-badge"><i class="fa-solid fa-circle-check"></i> Hotel Verified</span>
+              </div>
+              <p class="molecules-subtitle">Strict culinary purity standards crafted with zero compromises on ingredients.</p>
+
+              <div class="molecules-grid">
+                ${molecules.map(m => `
+                  <div class="molecule-card">
+                    <div class="mol-icon-box"><i class="fa-solid ${m.icon}"></i></div>
+                    <div class="mol-content">
+                      <span class="mol-name">${m.title}</span>
+                      <p class="mol-desc">${m.desc}</p>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Macro Nutrition & Serving Metrics -->
+            <div class="amazon-nutrition-section">
+              <h4><i class="fa-solid fa-chart-pie" style="color:var(--gold-accent);"></i> Nutritional Metrics & Portion</h4>
+              <div class="nutrition-macro-grid">
+                <div class="macro-cell">
+                  <span class="macro-val">${item.nutrition ? item.nutrition.calories : (item.calories || '650 kcal')}</span>
+                  <span class="macro-lbl">Calories</span>
+                </div>
+                <div class="macro-cell">
+                  <span class="macro-val">${item.nutrition ? item.nutrition.protein : '42g'}</span>
+                  <span class="macro-lbl">Protein</span>
+                </div>
+                <div class="macro-cell">
+                  <span class="macro-val">${item.nutrition ? item.nutrition.carbs : '58g'}</span>
+                  <span class="macro-lbl">Carbs</span>
+                </div>
+                <div class="macro-cell">
+                  <span class="macro-val">${item.nutrition ? item.nutrition.fats : '22g'}</span>
+                  <span class="macro-lbl">Healthy Fats</span>
+                </div>
+              </div>
+              <div class="macro-portion-note">
+                <i class="fa-solid fa-utensils"></i> Portion: <strong>${item.serving || 'Serves 1-2 (600g)'}</strong> | Prep: <strong>${item.prepTime || 'Freshly simmered'}</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Product Information, Ingredients & Amazon Reviews Column -->
+          <div class="amazon-info-col">
+            <h2 class="amazon-dish-title">${item.name}</h2>
+
+            <!-- Ratings & Velocity Banner -->
+            <div class="amazon-ratings-row">
+              <div class="stars-cluster">
+                ${Array(5).fill('<i class="fa-solid fa-star"></i>').join('')}
+                <span class="amazon-score">${item.rating}</span>
+              </div>
+              <span class="amazon-ratings-count">${item.reviewsCount || 1240} verified ratings</span>
+              <span class="amazon-orders-velocity"><i class="fa-solid fa-fire"></i> 500+ ordered this week</span>
+            </div>
+
+            <!-- Amazon Pricing & Delivery Block -->
+            <div class="amazon-pricing-box">
+              <div class="price-row-hero">
+                ${discount > 0 ? `<span class="discount-percent-tag">-${discount}%</span>` : ''}
+                <span class="price-currency">₹</span>
+                <span class="price-main-digit">${item.price}</span>
+                ${item.origPrice ? `<span class="price-mrp-was">M.R.P.: <del>₹${item.origPrice}</del></span>` : ''}
+              </div>
+              <span class="tax-inclusive-lbl">Inclusive of all local taxes & packaging</span>
+
+              <div class="delivery-perk-row">
+                <div class="perk-item">
+                  <i class="fa-solid fa-truck-fast"></i>
+                  <span><strong>Express 30-Min Delivery:</strong> Doorstep hot delivery across city.</span>
+                </div>
+                <div class="perk-item">
+                  <i class="fa-solid fa-box-open"></i>
+                  <span><strong>Aroma Seal Packaging:</strong> Sealed in food-grade thermal containers.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recipe Culinary Heritage -->
+            <div class="amazon-story-box">
+              <h4><i class="fa-solid fa-utensils" style="color:var(--gold-accent);"></i> Culinary Heritage & Preparation</h4>
+              <p>${item.description}</p>
+            </div>
+
+            <!-- Natural Ingredients Breakdown -->
+            <div class="amazon-ingredients-box">
+              <h4><i class="fa-solid fa-mortar-pestle" style="color:var(--gold-accent);"></i> Natural Ingredients & Whole Spices ("What's Inside")</h4>
+              <div class="ingredients-chip-list">
+                ${ingredients.map(ing => `
+                  <span class="ing-badge"><i class="fa-solid fa-check"></i> ${ing}</span>
+                `).join('')}
+              </div>
+              <div class="allergen-pill">
+                <i class="fa-solid fa-shield-halved"></i> <strong>Kitchen Hygiene Guarantee:</strong> 100% natural spices, zero artificial colors, zero chemical tenderizers. Handcrafted daily in our sanitized hotel kitchen.
+              </div>
+            </div>
+
+            <!-- Amazon Reviews & Star Breakdown -->
+            <div class="amazon-reviews-container">
+              <div class="reviews-header-amazon">
+                <h4>Customer Reviews & Testimonials</h4>
+                <div class="ratings-histogram-box">
+                  <div class="histogram-score-big">
+                    <span class="big-score">${item.rating}</span>
+                    <div class="score-stars-gold">
+                      ${Array(5).fill('<i class="fa-solid fa-star"></i>').join('')}
+                    </div>
+                    <span class="hist-count">${item.reviewsCount || 1240} ratings</span>
+                  </div>
+                  <div class="histogram-bars-list">
+                    <div class="hist-bar-row">
+                      <span>5 star</span>
+                      <div class="bar-track"><div class="bar-fill" style="width: 87%;"></div></div>
+                      <span>87%</span>
+                    </div>
+                    <div class="hist-bar-row">
+                      <span>4 star</span>
+                      <div class="bar-track"><div class="bar-fill" style="width: 10%;"></div></div>
+                      <span>10%</span>
+                    </div>
+                    <div class="hist-bar-row">
+                      <span>3 star</span>
+                      <div class="bar-track"><div class="bar-fill" style="width: 2%;"></div></div>
+                      <span>2%</span>
+                    </div>
+                    <div class="hist-bar-row">
+                      <span>2 star</span>
+                      <div class="bar-track"><div class="bar-fill" style="width: 1%;"></div></div>
+                      <span>1%</span>
+                    </div>
+                    <div class="hist-bar-row">
+                      <span>1 star</span>
+                      <div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div>
+                      <span>0%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stream of Verified Reviews -->
+              <div class="verified-reviews-stream">
+                ${reviews.map(r => `
+                  <div class="amazon-review-item">
+                    <div class="reviewer-meta">
+                      <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                      <div>
+                        <span class="reviewer-name-txt">${r.user}</span>
+                        <span class="verified-purchase-badge"><i class="fa-solid fa-circle-check"></i> Verified Hotel Order</span>
+                      </div>
+                    </div>
+                    <div class="rev-stars-date">
+                      <span class="rev-stars">${Array(r.rating).fill('<i class="fa-solid fa-star"></i>').join('')}</span>
+                      <span class="rev-date">${r.date}</span>
+                    </div>
+                    <p class="rev-text">"${r.comment}"</p>
+                    <div class="rev-helpful-action">
+                      <button type="button" class="btn-helpful"><i class="fa-regular fa-thumbs-up"></i> Helpful (${r.helpful || 34})</button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Sticky Bottom Action Bar -->
+        <div class="amazon-sticky-footer">
+          <div class="footer-qty-price">
+            <div class="qty-stepper-wrap">
+              <button type="button" class="qty-btn" id="modalQtyMinus"><i class="fa-solid fa-minus"></i></button>
+              <span class="qty-val" id="modalQtyVal">1</span>
+              <button type="button" class="qty-btn" id="modalQtyPlus"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="footer-price-col">
+              <span class="footer-price-sub">Total Amount</span>
+              <span class="footer-price-num" id="modalTotalPrice">₹${item.price}</span>
+            </div>
+          </div>
+          <div class="footer-actions-group">
+            <button type="button" class="btn btn-primary btn-modal-cart" id="modalAddToCartBtn">
+              <i class="fa-solid fa-basket-shopping"></i> Add to Basket
+            </button>
+            <button type="button" class="btn btn-whatsapp" id="modalWhatsAppBtn">
+              <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Hook events inside modal
+    const minusBtn = document.getElementById("modalQtyMinus");
+    const plusBtn = document.getElementById("modalQtyPlus");
+    const qtyValEl = document.getElementById("modalQtyVal");
+    const priceNumEl = document.getElementById("modalTotalPrice");
+    const addBtn = document.getElementById("modalAddToCartBtn");
+    const waBtn = document.getElementById("modalWhatsAppBtn");
+    const bcMenu = document.getElementById("modalBcMenu");
+
+    if (minusBtn && plusBtn && qtyValEl && priceNumEl) {
+      minusBtn.addEventListener("click", () => {
+        if (currentQty > 1) {
+          currentQty--;
+          qtyValEl.textContent = currentQty;
+          priceNumEl.textContent = `₹${item.price * currentQty}`;
+        }
+      });
+      plusBtn.addEventListener("click", () => {
+        if (currentQty < 20) {
+          currentQty++;
+          qtyValEl.textContent = currentQty;
+          priceNumEl.textContent = `₹${item.price * currentQty}`;
+        }
+      });
+    }
+
+    if (addBtn) {
+      addBtn.addEventListener("click", () => {
+        for (let i = 0; i < currentQty; i++) {
+          this.addToCart(item.id);
+        }
+        this.showToast(`Added ${currentQty}x ${item.name} to your basket!`, "success");
+        this.closeProductModal();
+      });
+    }
+
+    if (waBtn) {
+      waBtn.addEventListener("click", () => {
+        const text = encodeURIComponent(`Hello Anu Food Point! I would like to order:\n• ${currentQty}x ${item.name} (₹${item.price * currentQty})\nPlease confirm preparation and delivery.`);
+        window.open(`https://wa.me/919876543210?text=${text}`, "_blank");
+      });
+    }
+
+    if (bcMenu) {
+      bcMenu.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.closeProductModal();
+        const el = document.getElementById("menu-section");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+
+    // Open the modal
+    this.productModal.classList.add("active");
+    this.backdrop.classList.add("active");
+  },
+
+  closeProductModal() {
+    if (this.productModal) {
+      this.productModal.classList.remove("active");
+    }
+    if (!this.cartDrawer.classList.contains("active") && !this.checkoutModal.classList.contains("active") && !this.mobileDrawer.classList.contains("active")) {
+      this.backdrop.classList.remove("active");
+    }
   },
 
   /* ==========================================================================
@@ -616,7 +1020,7 @@ const AppController = {
 
     this.cartItemsList.innerHTML = this.cart.map(item => `
       <div class="cart-item-card">
-        <img src="${item.image}" alt="${item.name}" class="cart-item-img" onerror="this.src='https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=100'">
+        <img src="${item.image}" alt="${item.name}" class="cart-item-img" onerror="this.src='https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=100&auto=format&fit=crop&q=80'">
         <div class="cart-item-info">
           <h4 class="cart-item-title">${item.name}</h4>
           <div class="cart-item-price">₹${item.price} each</div>
