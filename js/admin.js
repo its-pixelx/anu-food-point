@@ -12,6 +12,7 @@ const AdminController = {
     this.bindEvents();
     this.loadData();
     this.render();
+    this.checkUrlAdminAccess();
   },
 
   cacheDom() {
@@ -136,6 +137,39 @@ const AdminController = {
         }
       });
     }
+
+    // Direct URL hash access listener
+    window.addEventListener("hashchange", () => this.checkUrlAdminAccess());
+
+    // Pro keyboard shortcut: Ctrl+Shift+A or Alt+A opens/toggles Admin Portal
+    window.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) || 
+          (e.altKey && (e.key === 'A' || e.key === 'a'))) {
+        e.preventDefault();
+        if (this.adminModal && this.adminModal.classList.contains("active")) {
+          this.closeModal();
+        } else {
+          this.openModal();
+        }
+      }
+    });
+  },
+
+  checkUrlAdminAccess() {
+    const hash = window.location.hash.toLowerCase();
+    const params = new URLSearchParams(window.location.search);
+    if (hash === '#admin-portal' || hash === '#admin' || params.has('admin')) {
+      setTimeout(() => {
+        this.openModal();
+        if (hash === '#admin-add') {
+          this.switchTab('add-item');
+        } else if (hash === '#admin-orders') {
+          this.switchTab('orders-mgr');
+        } else if (hash === '#admin-analytics') {
+          this.switchTab('analytics');
+        }
+      }, 100);
+    }
   },
 
   loadData() {
@@ -153,8 +187,15 @@ const AdminController = {
 
   closeModal() {
     this.adminModal.classList.remove("active");
-    this.backdrop.classList.remove("active");
-    document.body.style.overflow = "";
+    if (this.backdrop && (!AppController.cartDrawer || !AppController.cartDrawer.classList.contains("active")) && 
+        (!AppController.checkoutModal || !AppController.checkoutModal.classList.contains("active"))) {
+      this.backdrop.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+    // Clean up admin hash if closed
+    if (window.location.hash.toLowerCase().startsWith("#admin")) {
+      history.replaceState(null, null, window.location.pathname + window.location.search);
+    }
   },
 
   switchTab(tabId) {
