@@ -246,7 +246,7 @@ const AdminController = {
       <tr>
         <td>
           <div class="admin-item-cell">
-            <img src="${item.image}" alt="${item.name}" class="admin-item-thumb" onerror="this.src='https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200'">
+            <img src="${item.image}" alt="${item.name}" class="admin-item-thumb" onerror="this.src='https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=200&auto=format&fit=crop&q=80'">
             <div>
               <strong>${item.name}</strong>
               <div style="font-size:0.75rem; color:var(--text-dim);">${item.serving || 'Standard'}</div>
