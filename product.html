@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Dish Details & Ingredients | Anu Food Point Hotel</title>
+  <meta name="description" content="Inspect authentic non-veg dum delicacies, whole spices, zero preservatives guarantee, and Amazon-verified customer reviews at Anu Food Point Hotel.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .product-page-main {
+      padding: 1.5rem 0 5rem 0;
+      min-height: calc(100vh - 120px);
+    }
+    .page-back-nav {
+      margin-bottom: 1.25rem;
+    }
+    .btn-back-store {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gold-accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-full);
+      transition: all 0.2s ease;
+    }
+    .btn-back-store:hover {
+      background: rgba(245, 158, 11, 0.22);
+      color: #ffffff;
+      transform: translateX(-3px);
+    }
+    .product-page-wrapper {
+      background: #0f1219;
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="announcement-content">
+      <span class="badge-fire"><i class="fa-solid fa-fire"></i> SPECIAL</span>
+      <span class="announcement-text">🔥 Flat 20% OFF on Royal Dum Biryanis! Code: <strong>ROYAL20</strong></span>
+      <span class="separator desk-only">|</span>
+      <span class="desk-only"><i class="fa-solid fa-bolt"></i> 30-Min Fast Delivery</span>
+      <span class="separator desk-only">|</span>
+      <span class="desk-only"><i class="fa-solid fa-phone"></i> Orders: +91 98765 43210</span>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">ANU FOOD POINT</span>
+          <span class="brand-subtitle">HOTEL & CLOUD KITCHEN</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="store.html" class="nav-link"><i class="fa-solid fa-bowl-food"></i> Cloud Store</a>
+        <a href="index.html#about" class="nav-link"><i class="fa-solid fa-crown"></i> Heritage</a>
+        <a href="index.html#reviews" class="nav-link"><i class="fa-solid fa-star"></i> Reviews</a>
+        <a href="index.html#contact" class="nav-link"><i class="fa-solid fa-location-dot"></i> Contact</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <a href="store.html" class="btn btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+          <i class="fa-solid fa-store"></i> <span class="desk-only">Menu Store</span>
+        </a>
+        <button class="btn-cart" id="cartToggleBtn" aria-label="Open Basket">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <span class="cart-label">Cart</span>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <div class="logo-text">
+        <span class="brand-title">ANU FOOD POINT</span>
+        <span class="brand-subtitle">HOTEL & RESTAURANT</span>
+      </div>
+      <button class="close-drawer-btn" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mob-link"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="store.html" class="mob-link"><i class="fa-solid fa-bowl-food"></i> Cloud Kitchen Store</a>
+      <a href="index.html#about" class="mob-link"><i class="fa-solid fa-crown"></i> Royal Heritage</a>
+      <a href="index.html#reviews" class="mob-link"><i class="fa-solid fa-star"></i> Customer Reviews</a>
+      <a href="index.html#contact" class="mob-link"><i class="fa-solid fa-location-dot"></i> Contact Hotel</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <p><i class="fa-solid fa-phone"></i> Orders: +91 98765 43210</p>
+      <p><i class="fa-solid fa-motorcycle"></i> Express 30-Min Delivery</p>
+    </div>
+  </div>
+  <div class="backdrop" id="backdrop"></div>
+
+  <!-- Main Product Detail Page Container -->
+  <main class="product-page-main">
+    <div class="container">
+      <div class="page-back-nav">
+        <a href="store.html" class="btn-back-store">
+          <i class="fa-solid fa-arrow-left"></i> Back to Cloud Kitchen Store
+        </a>
+      </div>
+
+      <div class="product-page-wrapper" id="productPageContent">
+        <!-- Rendered dynamically via JavaScript -->
+        <div style="padding: 3rem; text-align: center; color: var(--text-muted);">
+          <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--gold-accent);"></i>
+          <p style="margin-top: 1rem;">Loading dish specifications & ingredients...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Your Cart">
+    <div class="cart-drawer-header">
+      <div class="cart-title-wrap">
+        <h3><i class="fa-solid fa-basket-shopping"></i> Your Food Basket</h3>
+        <span class="cart-items-count" id="cartHeaderCount">0 Items</span>
+      </div>
+      <button class="close-cart-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Free Delivery Progress Bar -->
+    <div class="free-delivery-tracker" id="freeDeliveryTracker">
+      <div class="tracker-text" id="trackerText">Add dishes worth ₹499 for FREE Delivery!</div>
+      <div class="tracker-bar">
+        <div class="tracker-fill" id="trackerFill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items Scrollable List -->
+    <div class="cart-items-container" id="cartItemsList">
+      <!-- Injected dynamically -->
+    </div>
+
+    <!-- Cart Footer & Billing -->
+    <div class="cart-drawer-footer">
+      <!-- Special Cooking Request Note -->
+      <div class="cooking-note-box">
+        <label for="cookingInstructions"><i class="fa-solid fa-pen"></i> Special Cooking Request:</label>
+        <input type="text" id="cookingInstructions" placeholder="e.g., Less spicy, extra raita, well roasted...">
+      </div>
+
+      <!-- Promo Code Section -->
+      <div class="promo-box">
+        <div class="promo-input-group">
+          <input type="text" id="promoInput" placeholder="Enter coupon (ROYAL20)" uppercase>
+          <button type="button" id="applyPromoBtn">Apply</button>
+        </div>
+        <div class="promo-feedback" id="promoFeedback"></div>
+      </div>
+
+      <!-- Bill Breakdown -->
+      <div class="bill-breakdown">
+        <div class="bill-row">
+          <span>Item Subtotal</span>
+          <span id="billSubtotal">₹0</span>
+        </div>
+        <div class="bill-row">
+          <span>Express Delivery Fee</span>
+          <span id="billDelivery">₹40</span>
+        </div>
+        <div class="bill-row">
+          <span>GST & Packaging (5%)</span>
+          <span id="billTax">₹0</span>
+        </div>
+        <div class="bill-row discount-row hidden" id="discountRow">
+          <span>Promo Discount</span>
+          <span id="billDiscount">-₹0</span>
+        </div>
+        <div class="bill-row total-row">
+          <span>Total To Pay</span>
+          <span id="billTotal">₹0</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="cart-action-buttons">
+        <button class="btn btn-primary btn-block" id="proceedCheckoutBtn">
+          <span>Proceed to Order</span>
+          <span id="checkoutBtnTotal">₹0</span>
+        </button>
+        <button class="btn btn-clear-cart" id="clearCartBtn">
+          <i class="fa-regular fa-trash-can"></i> Clear Basket
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="modal checkout-modal" id="checkoutModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3><i class="fa-solid fa-truck-fast"></i> Delivery & Payment Details</h3>
+          <p>Please enter your delivery destination</p>
+        </div>
+        <button class="modal-close-btn" id="closeCheckoutBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="checkoutForm" class="checkout-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="custName"><i class="fa-solid fa-user"></i> Full Name *</label>
+            <input type="text" id="custName" required placeholder="e.g. Ramesh Kumar">
+          </div>
+          <div class="form-group">
+            <label for="custPhone"><i class="fa-solid fa-phone"></i> Mobile Phone *</label>
+            <input type="tel" id="custPhone" required placeholder="e.g. 9876543210" pattern="[0-9]{10}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="custAddress"><i class="fa-solid fa-house"></i> Full Delivery Address *</label>
+          <textarea id="custAddress" required rows="2" placeholder="House/Flat No, Landmark, Area..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="paymentMethod"><i class="fa-solid fa-wallet"></i> Payment Method</label>
+          <select id="paymentMethod" required>
+            <option value="cod">Cash / UPI on Doorstep Delivery</option>
+            <option value="upi">Direct UPI (GooglePay / PhonePe / Paytm)</option>
+            <option value="card">Credit / Debit Card on Delivery</option>
+          </select>
+        </div>
+
+        <!-- Checkout Summary Preview -->
+        <div class="checkout-summary-box">
+          <div class="c-summary-row">
+            <span>Items Ordered:</span>
+            <span id="modalItemsCount">0 items</span>
+          </div>
+          <div class="c-summary-row highlight">
+            <span>Total Payable:</span>
+            <span id="modalPayableAmount">₹0</span>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-primary btn-block" id="confirmOrderBtn">
+            <i class="fa-solid fa-circle-check"></i> Confirm & Place Order Now
+          </button>
+          <button type="button" class="btn btn-whatsapp btn-block" id="whatsAppOrderBtn">
+            <i class="fa-brands fa-whatsapp"></i> Send Order Directly via WhatsApp
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Success Confirmation Modal -->
+  <div class="modal success-modal" id="orderSuccessModal">
+    <div class="modal-card text-center success-card">
+      <div class="success-icon-animation">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h2>Order Placed Successfully!</h2>
+      <p class="order-id-badge">Order ID: <strong id="successOrderId">#ANU-82910</strong></p>
+      <p class="success-msg">Thank you for choosing Anu Food Point Hotel! Our master chefs have begun preparing your dishes fresh in our sanitized handi kitchen.</p>
+
+      <div class="order-tracker-timeline">
+        <div class="track-step active">
+          <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+          <span>Received</span>
+        </div>
+        <div class="track-line active"></div>
+        <div class="track-step active">
+          <div class="step-circle"><i class="fa-solid fa-fire-burner"></i></div>
+          <span>Preparing</span>
+        </div>
+        <div class="track-line"></div>
+        <div class="track-step">
+          <div class="step-circle"><i class="fa-solid fa-motorcycle"></i></div>
+          <span>On the Way</span>
+        </div>
+      </div>
+
+      <div class="success-summary-box" id="successOrderDetails"></div>
+
+      <div class="modal-actions">
+        <a href="store.html" class="btn btn-primary" id="trackOrderCloseBtn">Order More Delicious Food</a>
+        <button class="btn btn-whatsapp" id="successWhatsappBtn"><i class="fa-brands fa-whatsapp"></i> Share on WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notifications -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Product Page Dedicated Controller
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id") || "anu-001";
+      const products = getStoredProducts();
+      const item = products.find(p => p.id === productId) || products[0];
+
+      if (!item) {
+        document.getElementById("productPageContent").innerHTML = `
+          <div style="padding: 3rem; text-align: center;">
+            <h2>Dish Not Found</h2>
+            <p>The requested specialty could not be located in our catalog.</p>
+            <a href="store.html" class="btn btn-primary" style="margin-top: 1rem;">Back to Store</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Update page title
+      document.title = `${item.name} | Anu Food Point Hotel`;
+
+      const isNonVeg = item.diet === "non-veg";
+      const discount = item.origPrice && item.origPrice > item.price 
+        ? Math.round(((item.origPrice - item.price) / item.origPrice) * 100) 
+        : 0;
+
+      const molecules = item.molecules || [
+        { icon: "fa-leaf", title: "No Preservatives", desc: "100% whole spices with zero artificial preservatives or synthetic chemicals." },
+        { icon: "fa-certificate", title: "100% Halal Prime Cut", desc: "Certified daily cuts prepared fresh in sanitized hotel kitchens." },
+        { icon: "fa-droplet-slash", title: "Zero Artificial Colors", desc: "Pure Kashmiri saffron and natural spice extract only." },
+        { icon: "fa-fire-burner", title: "Slow Dum Handi", desc: "Traditional clay handi sealed slow cooking." },
+        { icon: "fa-bottle-droplet", title: "Pure Cow Desi Ghee", desc: "Aromatic bilona cow ghee for unforgettable taste and lightness." },
+        { icon: "fa-shield-halved", title: "Cooked Fresh to Order", desc: "Prepared in small batches and delivered hot within 30 minutes." }
+      ];
+
+      const ingredients = item.ingredients || [
+        "2-Year Aged Daawat Basmati Rice",
+        "Farm Fresh Halal Poultry / Meat",
+        "Kashmiri Saffron (Grade 1)",
+        "Pure Cow Bilona Ghee",
+        "Golden Crispy Fried Onions (Birista)",
+        "Fresh Garden Mint & Coriander",
+        "Whole Star Anise & Cloves",
+        "Stone-Ground Royal Garam Masala"
+      ];
+
+      const reviews = item.amazonReviews && item.amazonReviews.length > 0
+        ? item.amazonReviews
+        : [
+            {
+              user: "Rohit Deshmukh",
+              verified: true,
+              rating: 5,
+              date: "3 days ago",
+              comment: "Unbelievable aroma the moment I unsealed the box! Distinct rice grains, juicy large chicken cuts with authentic saffron dum flavor. Far better than typical commercial biryani chains.",
+              helpful: 124
+            },
+            {
+              user: "Ananya Iyer",
+              verified: true,
+              rating: 5,
+              date: "Last week",
+              comment: "The chicken was soft, succulent, and well spiced without being oily. The Salan provided was rich with sesame and peanut paste. A 10/10 hotel biryani experience.",
+              helpful: 89
+            }
+          ];
+
+      let currentQty = 1;
+
+      document.getElementById("productPageContent").innerHTML = `
+        <div class="amazon-sheet-container" style="max-height: none;">
+          <!-- Top Navigation Bar & Amazon Badge -->
+          <div class="amazon-top-bar" style="padding-right: 2rem;">
+            <nav class="amazon-breadcrumb">
+              <a href="index.html" class="bc-link">Home</a>
+              <span class="bc-sep">›</span>
+              <a href="store.html" class="bc-link">Store</a>
+              <span class="bc-sep">›</span>
+              <span class="bc-cat">${(item.category || "specials").toUpperCase()}</span>
+              <span class="bc-sep">›</span>
+              <span class="bc-active">${item.name}</span>
+            </nav>
+            ${item.amazonChoice ? `<span class="amazon-choice-pill"><i class="fa-solid fa-award"></i> ${item.amazonChoice}</span>` : `<span class="amazon-choice-pill"><i class="fa-solid fa-crown"></i> Chef's Gold Choice</span>`}
+          </div>
+
+          <div class="amazon-sheet-body" style="overflow-y: visible;">
+            <!-- Left Visual & Purity Molecules Column -->
+            <div class="amazon-media-col">
+              <div class="amazon-photo-frame">
+                <img src="${item.image}" alt="${item.name}" class="amazon-main-photo" onerror="this.src='images/biryani.jpg'">
+                <div class="diet-indicator ${isNonVeg ? 'non-veg' : 'veg'}" title="${isNonVeg ? 'Non-Vegetarian' : 'Pure Vegetarian'}">
+                  <div class="diet-circle"></div>
+                </div>
+                ${item.badge ? `<span class="photo-badge">${item.badge}</span>` : ''}
+              </div>
+
+              <!-- Purity & Quality Molecules Section -->
+              <div class="amazon-molecules-section">
+                <div class="section-title-wrap">
+                  <h4><i class="fa-solid fa-dna" style="color:var(--gold-accent);"></i> Purity & Ingredient Molecules</h4>
+                  <span class="purity-verified-badge"><i class="fa-solid fa-circle-check"></i> Hotel Verified</span>
+                </div>
+                <p class="molecules-subtitle">Strict culinary purity standards crafted with zero compromises on ingredients.</p>
+
+                <div class="molecules-grid">
+                  ${molecules.map(m => `
+                    <div class="molecule-card">
+                      <div class="mol-icon-box"><i class="fa-solid ${m.icon}"></i></div>
+                      <div class="mol-content">
+                        <span class="mol-name">${m.title}</span>
+                        <p class="mol-desc">${m.desc}</p>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Macro Nutrition & Serving Metrics -->
+              <div class="amazon-nutrition-section">
+                <h4><i class="fa-solid fa-chart-pie" style="color:var(--gold-accent);"></i> Nutritional Metrics & Portion</h4>
+                <div class="nutrition-macro-grid">
+                  <div class="macro-cell">
+                    <span class="macro-val">${item.nutrition ? item.nutrition.calories : (item.calories || '650 kcal')}</span>
+                    <span class="macro-lbl">Calories</span>
+                  </div>
+                  <div class="macro-cell">
+                    <span class="macro-val">${item.nutrition ? item.nutrition.protein : '42g'}</span>
+                    <span class="macro-lbl">Protein</span>
+                  </div>
+                  <div class="macro-cell">
+                    <span class="macro-val">${item.nutrition ? item.nutrition.carbs : '58g'}</span>
+                    <span class="macro-lbl">Carbs</span>
+                  </div>
+                  <div class="macro-cell">
+                    <span class="macro-val">${item.nutrition ? item.nutrition.fats : '22g'}</span>
+                    <span class="macro-lbl">Healthy Fats</span>
+                  </div>
+                </div>
+                <div class="macro-portion-note">
+                  <i class="fa-solid fa-utensils"></i> Portion: <strong>${item.serving || 'Serves 1-2 (600g)'}</strong> | Prep: <strong>${item.prepTime || 'Freshly simmered'}</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Product Information, Ingredients & Amazon Reviews Column -->
+            <div class="amazon-info-col">
+              <h2 class="amazon-dish-title">${item.name}</h2>
+
+              <!-- Ratings & Velocity Banner -->
+              <div class="amazon-ratings-row">
+                <div class="stars-cluster">
+                  ${Array(5).fill('<i class="fa-solid fa-star"></i>').join('')}
+                  <span class="amazon-score">${item.rating}</span>
+                </div>
+                <span class="amazon-ratings-count">${item.reviewsCount || 1240} verified ratings</span>
+                <span class="amazon-orders-velocity"><i class="fa-solid fa-fire"></i> 500+ ordered this week</span>
+              </div>
+
+              <!-- Amazon Pricing & Delivery Block -->
+              <div class="amazon-pricing-box">
+                <div class="price-row-hero">
+                  ${discount > 0 ? `<span class="discount-percent-tag">-${discount}%</span>` : ''}
+                  <span class="price-currency">₹</span>
+                  <span class="price-main-digit">${item.price}</span>
+                  ${item.origPrice ? `<span class="price-mrp-was">M.R.P.: <del>₹${item.origPrice}</del></span>` : ''}
+                </div>
+                <span class="tax-inclusive-lbl">Inclusive of all local taxes & packaging</span>
+
+                <div class="delivery-perk-row">
+                  <div class="perk-item">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <span><strong>Express 30-Min Delivery:</strong> Doorstep hot delivery across city.</span>
+                  </div>
+                  <div class="perk-item">
+                    <i class="fa-solid fa-box-open"></i>
+                    <span><strong>Aroma Seal Packaging:</strong> Sealed in food-grade thermal containers.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recipe Culinary Heritage -->
+              <div class="amazon-story-box">
+                <h4><i class="fa-solid fa-utensils" style="color:var(--gold-accent);"></i> Culinary Heritage & Preparation</h4>
+                <p>${item.description}</p>
+              </div>
+
+              <!-- Natural Ingredients Breakdown -->
+              <div class="amazon-ingredients-box">
+                <h4><i class="fa-solid fa-mortar-pestle" style="color:var(--gold-accent);"></i> Natural Ingredients & Whole Spices ("What's Inside")</h4>
+                <div class="ingredients-chip-list">
+                  ${ingredients.map(ing => `
+                    <span class="ing-badge"><i class="fa-solid fa-check"></i> ${ing}</span>
+                  `).join('')}
+                </div>
+                <div class="allergen-pill">
+                  <i class="fa-solid fa-shield-halved"></i> <strong>Kitchen Hygiene Guarantee:</strong> 100% natural spices, zero artificial colors, zero chemical tenderizers. Handcrafted daily in our sanitized hotel cloud kitchen.
+                </div>
+              </div>
+
+              <!-- Amazon Reviews & Star Breakdown -->
+              <div class="amazon-reviews-container">
+                <div class="reviews-header-amazon">
+                  <h4>Customer Reviews & Testimonials</h4>
+                  <div class="ratings-histogram-box">
+                    <div class="histogram-score-big">
+                      <span class="big-score">${item.rating}</span>
+                      <div class="score-stars-gold">
+                        ${Array(5).fill('<i class="fa-solid fa-star"></i>').join('')}
+                      </div>
+                      <span class="hist-count">${item.reviewsCount || 1240} ratings</span>
+                    </div>
+                    <div class="histogram-bars-list">
+                      <div class="hist-bar-row">
+                        <span>5 star</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 87%;"></div></div>
+                        <span>87%</span>
+                      </div>
+                      <div class="hist-bar-row">
+                        <span>4 star</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 10%;"></div></div>
+                        <span>10%</span>
+                      </div>
+                      <div class="hist-bar-row">
+                        <span>3 star</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 2%;"></div></div>
+                        <span>2%</span>
+                      </div>
+                      <div class="hist-bar-row">
+                        <span>2 star</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 1%;"></div></div>
+                        <span>1%</span>
+                      </div>
+                      <div class="hist-bar-row">
+                        <span>1 star</span>
+                        <div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div>
+                        <span>0%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stream of Verified Reviews -->
+                <div class="verified-reviews-stream">
+                  ${reviews.map(r => `
+                    <div class="amazon-review-item">
+                      <div class="reviewer-meta">
+                        <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                          <span class="reviewer-name-txt">${r.user}</span>
+                          <span class="verified-purchase-badge"><i class="fa-solid fa-circle-check"></i> Verified Hotel Order</span>
+                        </div>
+                      </div>
+                      <div class="rev-stars-date">
+                        <span class="rev-stars">${Array(r.rating).fill('<i class="fa-solid fa-star"></i>').join('')}</span>
+                        <span class="rev-date">${r.date}</span>
+                      </div>
+                      <p class="rev-text">"${r.comment}"</p>
+                      <div class="rev-helpful-action">
+                        <button type="button" class="btn-helpful"><i class="fa-regular fa-thumbs-up"></i> Helpful (${r.helpful || 34})</button>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Sticky Bottom Action Bar -->
+          <div class="amazon-sticky-footer" style="position: sticky; bottom: 0;">
+            <div class="footer-qty-price">
+              <div class="qty-stepper-wrap">
+                <button type="button" class="qty-btn" id="pageQtyMinus"><i class="fa-solid fa-minus"></i></button>
+                <span class="qty-val" id="pageQtyVal">1</span>
+                <button type="button" class="qty-btn" id="pageQtyPlus"><i class="fa-solid fa-plus"></i></button>
+              </div>
+              <div class="footer-price-col">
+                <span class="footer-price-sub">Total Amount</span>
+                <span class="footer-price-num" id="pageTotalPrice">₹${item.price}</span>
+              </div>
+            </div>
+            <div class="footer-actions-group">
+              <button type="button" class="btn btn-primary btn-modal-cart" id="pageAddToCartBtn">
+                <i class="fa-solid fa-basket-shopping"></i> Add to Basket
+              </button>
+              <button type="button" class="btn btn-whatsapp" id="pageWhatsAppBtn">
+                <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Page Stepper & Add to cart events
+      const minusBtn = document.getElementById("pageQtyMinus");
+      const plusBtn = document.getElementById("pageQtyPlus");
+      const qtyValEl = document.getElementById("pageQtyVal");
+      const priceNumEl = document.getElementById("pageTotalPrice");
+      const addBtn = document.getElementById("pageAddToCartBtn");
+      const waBtn = document.getElementById("pageWhatsAppBtn");
+
+      if (minusBtn && plusBtn && qtyValEl && priceNumEl) {
+        minusBtn.addEventListener("click", () => {
+          if (currentQty > 1) {
+            currentQty--;
+            qtyValEl.textContent = currentQty;
+            priceNumEl.textContent = `₹${item.price * currentQty}`;
+          }
+        });
+        plusBtn.addEventListener("click", () => {
+          if (currentQty < 20) {
+            currentQty++;
+            qtyValEl.textContent = currentQty;
+            priceNumEl.textContent = `₹${item.price * currentQty}`;
+          }
+        });
+      }
+
+      if (addBtn) {
+        addBtn.addEventListener("click", () => {
+          for (let i = 0; i < currentQty; i++) {
+            AppController.addToCart(item.id);
+          }
+          AppController.showToast(`Added ${currentQty}x ${item.name} to your basket!`, "success");
+        });
+      }
+
+      if (waBtn) {
+        waBtn.addEventListener("click", () => {
+          const text = encodeURIComponent(`Hello Anu Food Point! I would like to order:\n• ${currentQty}x ${item.name} (₹${item.price * currentQty})\nPlease confirm preparation and delivery.`);
+          window.open(`https://wa.me/919876543210?text=${text}`, "_blank");
+        });
+      }
+    });
+  </script>
+</body>
+</html>

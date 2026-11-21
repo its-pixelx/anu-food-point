@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Online Cloud Kitchen Store | Anu Food Point Hotel</title>
+  <meta name="description" content="Order authentic clay pot dum biryanis, fiery tandoori roasts, and gourmet non-veg curries online from Anu Food Point Cloud Kitchen. 30-min express city delivery.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .store-hero-header {
+      padding: 2rem 0 1.5rem;
+      background: linear-gradient(180deg, rgba(230, 81, 0, 0.08) 0%, transparent 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 2rem;
+    }
+    .store-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+    .store-badge-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-top: 0.65rem;
+    }
+    .store-purity-pill {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .store-nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--gold-accent);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-full);
+      transition: all 0.2s ease;
+    }
+    .store-nav-back:hover {
+      background: rgba(245, 158, 11, 0.22);
+      color: #ffffff;
+      transform: translateX(-3px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="announcement-content">
+      <span class="badge-fire"><i class="fa-solid fa-fire"></i> SPECIAL</span>
+      <span class="announcement-text">🔥 Flat 20% OFF on Royal Dum Biryanis! Code: <strong>ROYAL20</strong></span>
+      <span class="separator desk-only">|</span>
+      <span class="desk-only"><i class="fa-solid fa-bolt"></i> 30-Min Fast Delivery</span>
+      <span class="separator desk-only">|</span>
+      <span class="desk-only"><i class="fa-solid fa-phone"></i> Orders: +91 98765 43210</span>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">ANU FOOD POINT</span>
+          <span class="brand-subtitle">HOTEL & CLOUD KITCHEN</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="store.html" class="nav-link active"><i class="fa-solid fa-bowl-food"></i> Cloud Store</a>
+        <a href="index.html#about" class="nav-link"><i class="fa-solid fa-crown"></i> Heritage</a>
+        <a href="index.html#reviews" class="nav-link"><i class="fa-solid fa-star"></i> Reviews</a>
+        <a href="index.html#contact" class="nav-link"><i class="fa-solid fa-location-dot"></i> Contact</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <button class="btn-cart" id="cartToggleBtn" aria-label="Open Shopping Basket">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <span class="cart-label">Cart</span>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <div class="logo-text">
+        <span class="brand-title">ANU FOOD POINT</span>
+        <span class="brand-subtitle">HOTEL & RESTAURANT</span>
+      </div>
+      <button class="close-drawer-btn" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mob-link"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="store.html" class="mob-link active"><i class="fa-solid fa-bowl-food"></i> Cloud Kitchen Store</a>
+      <a href="index.html#about" class="mob-link"><i class="fa-solid fa-crown"></i> Royal Heritage</a>
+      <a href="index.html#reviews" class="mob-link"><i class="fa-solid fa-star"></i> Customer Reviews</a>
+      <a href="index.html#contact" class="mob-link"><i class="fa-solid fa-location-dot"></i> Contact Hotel</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <p><i class="fa-solid fa-phone"></i> Orders: +91 98765 43210</p>
+      <p><i class="fa-solid fa-motorcycle"></i> Express 30-Min Delivery</p>
+    </div>
+  </div>
+  <div class="backdrop" id="backdrop"></div>
+
+  <!-- Store Header Banner -->
+  <section class="store-hero-header">
+    <div class="container">
+      <div class="store-header-inner">
+        <div>
+          <a href="index.html" class="store-nav-back" style="margin-bottom: 0.75rem;">
+            <i class="fa-solid fa-arrow-left"></i> Hotel Home & Showcase
+          </a>
+          <h1 style="font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; color: #ffffff; margin-bottom: 0.35rem; font-family: var(--font-heading);">
+            Cloud Kitchen Online Menu
+          </h1>
+          <p style="color: var(--text-muted); font-size: 0.92rem; max-width: 680px; margin: 0;">
+            Select your favorite authentic slow-cooked delicacies. Prepared fresh in hygienic clay handis and delivered piping hot across the city.
+          </p>
+          <div class="store-badge-strip">
+            <span class="store-purity-pill"><i class="fa-solid fa-leaf"></i> Zero Chemical Preservatives</span>
+            <span class="store-purity-pill"><i class="fa-solid fa-certificate"></i> 100% Halal Certified Morning Cuts</span>
+            <span class="store-purity-pill"><i class="fa-solid fa-bolt"></i> 30-Min Fresh Thermal Dispatch</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store Main Menu Section -->
+  <main class="menu-section" id="menu-section" style="padding-top: 0;">
+    <div class="container">
+      
+      <!-- Search & Filters Toolbar -->
+      <div class="menu-controls-card">
+        <div class="controls-top-row">
+          <!-- Real-Time Search Input -->
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="menuSearchInput" placeholder="Search biryani, tandoori, curries, kebabs..." autocomplete="off">
+            <button class="clear-search-btn" id="clearSearchBtn" aria-label="Clear Search"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <!-- Dietary Toggle (Veg / Non-Veg / All) -->
+          <div class="dietary-filter-group" role="group" aria-label="Dietary filter">
+            <button class="diet-btn active" data-diet="all">All Items</button>
+            <button class="diet-btn" data-diet="non-veg">
+              <span class="dot non-veg"></span> Non-Veg (Royal)
+            </button>
+            <button class="diet-btn" data-diet="veg">
+              <span class="dot veg"></span> Pure Veg
+            </button>
+          </div>
+
+          <!-- Sort Select -->
+          <div class="sort-box">
+            <label for="sortSelect" class="sr-only">Sort dishes</label>
+            <i class="fa-solid fa-arrow-down-short-wide sort-icon"></i>
+            <select id="sortSelect">
+              <option value="featured">Featured / Recommended</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating-high">Top Rated (Amazon 5★)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills Strip (Scrollbar completely hidden) -->
+        <div class="category-pills" role="tablist">
+          <button class="category-pill active" data-category="all" role="tab">
+            <i class="fa-solid fa-layer-group"></i> All Specials (<span id="count-all">10</span>)
+          </button>
+          <button class="category-pill" data-category="biryani" role="tab">
+            <i class="fa-solid fa-drumstick-bite"></i> Biryani & Rice (<span id="count-biryani">2</span>)
+          </button>
+          <button class="category-pill" data-category="starters" role="tab">
+            <i class="fa-solid fa-fire"></i> Tandoor & Starters (<span id="count-starters">2</span>)
+          </button>
+          <button class="category-pill" data-category="curries" role="tab">
+            <i class="fa-solid fa-bowl-rice"></i> Royal Curries (<span id="count-curries">3</span>)
+          </button>
+          <button class="category-pill" data-category="seafood" role="tab">
+            <i class="fa-solid fa-shrimp"></i> Coastal Seafood (<span id="count-seafood">1</span>)
+          </button>
+          <button class="category-pill" data-category="breads" role="tab">
+            <i class="fa-solid fa-bread-slice"></i> Tandoori Breads (<span id="count-breads">1</span>)
+          </button>
+          <button class="category-pill" data-category="desserts" role="tab">
+            <i class="fa-solid fa-ice-cream"></i> Royal Desserts (<span id="count-desserts">1</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- Food Menu Cards Grid -->
+      <div class="menu-grid" id="menuGrid">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+
+      <!-- Empty Filter State -->
+      <div class="no-items-state hidden" id="noItemsState">
+        <div class="no-items-icon"><i class="fa-solid fa-bowl-food"></i></div>
+        <h3>No matching dishes found</h3>
+        <p>Try searching for a different dish name, or reset your dietary filters.</p>
+        <button class="btn btn-secondary" id="resetFiltersBtn">Reset All Filters</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Your Cart">
+    <div class="cart-drawer-header">
+      <div class="cart-title-wrap">
+        <h3><i class="fa-solid fa-basket-shopping"></i> Your Food Basket</h3>
+        <span class="cart-items-count" id="cartHeaderCount">0 Items</span>
+      </div>
+      <button class="close-cart-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Free Delivery Progress Bar -->
+    <div class="free-delivery-tracker" id="freeDeliveryTracker">
+      <div class="tracker-text" id="trackerText">Add dishes worth ₹499 for FREE Delivery!</div>
+      <div class="tracker-bar">
+        <div class="tracker-fill" id="trackerFill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items Scrollable List -->
+    <div class="cart-items-container" id="cartItemsList">
+      <!-- Injected dynamically -->
+    </div>
+
+    <!-- Cart Footer & Billing -->
+    <div class="cart-drawer-footer">
+      <!-- Special Cooking Request Note -->
+      <div class="cooking-note-box">
+        <label for="cookingInstructions"><i class="fa-solid fa-pen"></i> Special Cooking Request:</label>
+        <input type="text" id="cookingInstructions" placeholder="e.g., Less spicy, extra raita, well roasted...">
+      </div>
+
+      <!-- Promo Code Section -->
+      <div class="promo-box">
+        <div class="promo-input-group">
+          <input type="text" id="promoInput" placeholder="Enter coupon (ROYAL20)" uppercase>
+          <button type="button" id="applyPromoBtn">Apply</button>
+        </div>
+        <div class="promo-feedback" id="promoFeedback"></div>
+      </div>
+
+      <!-- Bill Breakdown -->
+      <div class="bill-breakdown">
+        <div class="bill-row">
+          <span>Item Subtotal</span>
+          <span id="billSubtotal">₹0</span>
+        </div>
+        <div class="bill-row">
+          <span>Express Delivery Fee</span>
+          <span id="billDelivery">₹40</span>
+        </div>
+        <div class="bill-row">
+          <span>GST & Packaging (5%)</span>
+          <span id="billTax">₹0</span>
+        </div>
+        <div class="bill-row discount-row hidden" id="discountRow">
+          <span>Promo Discount</span>
+          <span id="billDiscount">-₹0</span>
+        </div>
+        <div class="bill-row total-row">
+          <span>Total To Pay</span>
+          <span id="billTotal">₹0</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="cart-action-buttons">
+        <button class="btn btn-primary btn-block" id="proceedCheckoutBtn">
+          <span>Proceed to Order</span>
+          <span id="checkoutBtnTotal">₹0</span>
+        </button>
+        <button class="btn btn-clear-cart" id="clearCartBtn">
+          <i class="fa-regular fa-trash-can"></i> Clear Basket
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="modal checkout-modal" id="checkoutModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3><i class="fa-solid fa-truck-fast"></i> Delivery & Payment Details</h3>
+          <p>Please enter your delivery destination</p>
+        </div>
+        <button class="modal-close-btn" id="closeCheckoutBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="checkoutForm" class="checkout-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="custName"><i class="fa-solid fa-user"></i> Full Name *</label>
+            <input type="text" id="custName" required placeholder="e.g. Ramesh Kumar">
+          </div>
+          <div class="form-group">
+            <label for="custPhone"><i class="fa-solid fa-phone"></i> Mobile Phone *</label>
+            <input type="tel" id="custPhone" required placeholder="e.g. 9876543210" pattern="[0-9]{10}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="custAddress"><i class="fa-solid fa-house"></i> Full Delivery Address *</label>
+          <textarea id="custAddress" required rows="2" placeholder="House/Flat No, Landmark, Area..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="paymentMethod"><i class="fa-solid fa-wallet"></i> Payment Method</label>
+          <select id="paymentMethod" required>
+            <option value="cod">Cash / UPI on Doorstep Delivery</option>
+            <option value="upi">Direct UPI (GooglePay / PhonePe / Paytm)</option>
+            <option value="card">Credit / Debit Card on Delivery</option>
+          </select>
+        </div>
+
+        <!-- Checkout Summary Preview -->
+        <div class="checkout-summary-box">
+          <div class="c-summary-row">
+            <span>Items Ordered:</span>
+            <span id="modalItemsCount">0 items</span>
+          </div>
+          <div class="c-summary-row highlight">
+            <span>Total Payable:</span>
+            <span id="modalPayableAmount">₹0</span>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-primary btn-block" id="confirmOrderBtn">
+            <i class="fa-solid fa-circle-check"></i> Confirm & Place Order Now
+          </button>
+          <button type="button" class="btn btn-whatsapp btn-block" id="whatsAppOrderBtn">
+            <i class="fa-brands fa-whatsapp"></i> Send Order Directly via WhatsApp
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Success Confirmation Modal -->
+  <div class="modal success-modal" id="orderSuccessModal">
+    <div class="modal-card text-center success-card">
+      <div class="success-icon-animation">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h2>Order Placed Successfully!</h2>
+      <p class="order-id-badge">Order ID: <strong id="successOrderId">#ANU-82910</strong></p>
+      <p class="success-msg">Thank you for choosing Anu Food Point Hotel! Our master chefs have begun preparing your dishes fresh in our sanitized handi kitchen.</p>
+
+      <div class="order-tracker-timeline">
+        <div class="track-step active">
+          <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+          <span>Received</span>
+        </div>
+        <div class="track-line active"></div>
+        <div class="track-step active">
+          <div class="step-circle"><i class="fa-solid fa-fire-burner"></i></div>
+          <span>Preparing</span>
+        </div>
+        <div class="track-line"></div>
+        <div class="track-step">
+          <div class="step-circle"><i class="fa-solid fa-motorcycle"></i></div>
+          <span>On the Way</span>
+        </div>
+      </div>
+
+      <div class="success-summary-box" id="successOrderDetails"></div>
+
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="trackOrderCloseBtn">Order More Delicious Food</button>
+        <button class="btn btn-whatsapp" id="successWhatsappBtn"><i class="fa-brands fa-whatsapp"></i> Share on WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Modal for In-Store Quick Amazon View -->
+  <div class="modal review-modal" id="productModal" role="dialog" aria-modal="true">
+    <div class="modal-card product-modal-card">
+      <button class="modal-close-btn" id="closeProductModalBtn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-product-layout" id="modalProductContent"></div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notifications -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col brand-col">
+        <div class="brand-logo footer-logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <div class="logo-text">
+            <span class="brand-title">ANU FOOD POINT</span>
+            <span class="brand-subtitle">HOTEL & CLOUD KITCHEN</span>
+          </div>
+        </div>
+        <p class="footer-desc">
+          Delivering the timeless aroma of Awadhi, Mughlai, and Hyderabadi culinary heritage directly to your doorstep.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Store Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Hotel Home & Showcase</a></li>
+          <li><a href="store.html">Cloud Kitchen Menu</a></li>
+          <li><a href="index.html#about">Royal Heritage & Standards</a></li>
+          <li><a href="index.html#reviews">Customer Ratings & Reviews</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Quality Guarantees</h4>
+        <ul class="footer-links">
+          <li><span>🍃 Zero Preservatives</span></li>
+          <li><span>🥩 100% Halal Prime Daily Cuts</span></li>
+          <li><span>🎨 Zero Artificial Colors</span></li>
+          <li><span>🥣 Handi Dum Slow Braising</span></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Kitchen Dispatch</h4>
+        <p class="footer-contact-item"><i class="fa-solid fa-clock"></i> 11:30 AM – 11:30 PM (Daily)</p>
+        <p class="footer-contact-item"><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+        <p class="footer-contact-item"><i class="fa-solid fa-location-dot"></i> Central Kitchen Hub, City Road</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 Anu Food Point Hotel & Cloud Kitchen. All rights reserved.</p>
+        <div>
+          <a href="admin.html" class="staff-portal-link"><i class="fa-solid fa-lock"></i> Staff Portal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
