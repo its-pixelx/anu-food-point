@@ -42,8 +42,13 @@ An official, responsive front-end website for **Anu Food Point Hotel** — built
   - Generates authentic order tracking ID (e.g. `#ANU-82910`).
   - **Direct WhatsApp Order Integration:** Automatically formats the cart into an instant WhatsApp message prefilled with dish items, notes, address, and total payable amount.
 
-### 4. Built-in Store Owner Admin Portal
-- Accessible via the **"Admin Portal"** button in navbar, banner, or footer.
+### 4. Dedicated Store Owner Admin Portal (Separate Access)
+- **Separate Link & Clean Customer Experience:** Removed all administrative buttons from public customer view (navbar, hero, menu bar, mobile drawer, and bottom navigation) to keep the site looking like an official, high-end food delivery service.
+- **Direct Access Methods:**
+  - Direct URL: **[admin.html](https://its-pixelx.github.io/anu-food-point/admin.html)**
+  - Direct URL Hash: **[#admin-portal](https://its-pixelx.github.io/anu-food-point/#admin-portal)**
+  - Discreet "Staff Portal" link in the footer
+  - Keyboard Shortcut: `Ctrl + Shift + A` or `Alt + A`
 - **Menu Management:**
   - View full catalog with category, price, spice level, and stock status.
   - Toggle items **In Stock / Out of Stock** with one click.
@@ -69,6 +74,7 @@ anu-food-point/
 │   └── workflows/
 │       └── deploy-pages.yml  # Automated GitHub Actions deployment to GitHub Pages
 ├── index.html                # Main semantic, accessible front-end application
+├── admin.html                # Dedicated staff & owner admin access portal
 ├── css/
 │   └── styles.css            # Modern custom CSS with 3D flip mechanics, variables, and responsive layout
 ├── js/
