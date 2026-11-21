@@ -20,12 +20,12 @@
   <!-- Top Announcement Bar -->
   <div class="announcement-bar">
     <div class="announcement-content">
-      <span class="badge-fire"><i class="fa-solid fa-fire"></i> HOTEL SPECIAL</span>
-      <span>🔥 Flat 20% OFF on all Non-Veg Royal Biryanis today! Use code <strong>ROYAL20</strong> at checkout</span>
-      <span class="separator">|</span>
-      <span><i class="fa-solid fa-clock"></i> Express 30-Min Delivery Across City</span>
-      <span class="separator">|</span>
-      <span><i class="fa-solid fa-phone"></i> Direct Call: +91 98765 43210</span>
+      <span class="badge-fire"><i class="fa-solid fa-fire"></i> SPECIAL</span>
+      <span class="announcement-text">🔥 Flat 20% OFF on Royal Dum Biryanis! Code: <strong>ROYAL20</strong></span>
+      <span class="separator desk-only">|</span>
+      <span class="desk-only"><i class="fa-solid fa-bolt"></i> 30-Min Fast Delivery</span>
+      <span class="separator desk-only">|</span>
+      <span class="desk-only"><i class="fa-solid fa-phone"></i> Orders: +91 98765 43210</span>
     </div>
   </div>
 
@@ -45,14 +45,18 @@
       <!-- Desktop Nav Links -->
       <nav class="nav-menu" id="navMenu">
         <a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="#menu-section" class="nav-link"><i class="fa-solid fa-bowl-food"></i> Our Menu</a>
-        <a href="#about" class="nav-link"><i class="fa-solid fa-crown"></i> Royal Heritage</a>
+        <a href="store.html" class="nav-link"><i class="fa-solid fa-store"></i> Cloud Store</a>
+        <a href="#signature" class="nav-link"><i class="fa-solid fa-certificate"></i> Specialties</a>
+        <a href="#about" class="nav-link"><i class="fa-solid fa-crown"></i> Heritage</a>
         <a href="#reviews" class="nav-link"><i class="fa-solid fa-star"></i> Reviews</a>
         <a href="#contact" class="nav-link"><i class="fa-solid fa-location-dot"></i> Contact</a>
       </nav>
 
       <!-- Nav Actions -->
       <div class="nav-actions">
+        <a href="store.html" class="btn btn-secondary desk-only" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+          <i class="fa-solid fa-utensils"></i> Order Online
+        </a>
         <!-- Cart Trigger Button -->
         <button class="btn-cart" id="cartToggleBtn" aria-label="Open Shopping Cart">
           <i class="fa-solid fa-basket-shopping"></i>
@@ -81,7 +85,8 @@
     </div>
     <div class="mobile-nav-links">
       <a href="#hero" class="mob-link"><i class="fa-solid fa-house"></i> Home</a>
-      <a href="#menu-section" class="mob-link"><i class="fa-solid fa-bowl-food"></i> Our Menu</a>
+      <a href="store.html" class="mob-link"><i class="fa-solid fa-store"></i> Cloud Kitchen Store</a>
+      <a href="#signature" class="mob-link"><i class="fa-solid fa-certificate"></i> Signature Specialties</a>
       <a href="#about" class="mob-link"><i class="fa-solid fa-crown"></i> Royal Heritage</a>
       <a href="#reviews" class="mob-link"><i class="fa-solid fa-star"></i> Customer Reviews</a>
       <a href="#contact" class="mob-link"><i class="fa-solid fa-location-dot"></i> Find Hotel</a>
@@ -118,12 +123,12 @@
 
         <!-- Hero Actions -->
         <div class="hero-buttons">
-          <a href="#menu-section" class="btn btn-primary btn-glow">
-            <i class="fa-solid fa-utensils"></i> Order Online Now
+          <a href="store.html" class="btn btn-primary btn-glow">
+            <i class="fa-solid fa-basket-shopping"></i> Order Online from Cloud Kitchen
           </a>
-          <button class="btn btn-secondary" id="heroReviewsBtn">
-            <i class="fa-solid fa-star"></i> Customer Ratings
-          </button>
+          <a href="#signature" class="btn btn-secondary">
+            <i class="fa-solid fa-fire-burner"></i> Signature Specialties
+          </a>
         </div>
 
         <!-- Trust Stats -->
@@ -202,88 +207,161 @@
     </div>
   </section>
 
-  <!-- Main Menu Catalog Section -->
-  <section class="menu-section" id="menu-section">
+  <!-- Chef's Signature Specialties Showcase (Separated Hero & Store Experience) -->
+  <section class="signature-section" id="signature" style="padding: 3.5rem 0; background: rgba(0, 0, 0, 0.2);">
     <div class="container">
-      <div class="section-header text-center">
-        <span class="section-tag"><i class="fa-solid fa-fire-burner"></i> CHEF'S SIGNATURE MENU</span>
-        <h2 class="section-title">Explore Our Royal Delicacies</h2>
+      <div class="section-header text-center" style="margin-bottom: 2.5rem;">
+        <span class="section-tag"><i class="fa-solid fa-crown" style="color:var(--gold-accent);"></i> CHEF'S SIGNATURE SHOWCASE</span>
+        <h2 class="section-title">Royal Handcrafted Bestsellers</h2>
         <p class="section-subtitle">
-          Hover or click the <strong>"Flip for Amazon-Style Reviews 🔄"</strong> button to inspect ingredients, spices, and verified guest testimonials.
+          Savor our most celebrated slow-cooked dum recipes. Crafted with <strong>Zero Preservatives</strong>, <strong>100% Halal Cuts</strong>, and <strong>Pure Cow Bilona Ghee</strong>.
         </p>
       </div>
 
-      <!-- Controls: Search, Dietary Filter, Sort & Add Item Shortcut -->
-      <div class="menu-controls-wrapper">
-        <!-- Search Field -->
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="menuSearchInput" placeholder="Search biryani, tandoori chicken, mutton, rogan josh...">
-          <button class="clear-search-btn" id="clearSearchBtn" title="Clear Search"><i class="fa-solid fa-circle-xmark"></i></button>
+      <!-- 3 Featured Signature Cards Grid -->
+      <div class="menu-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        
+        <!-- Signature Dish 1 -->
+        <div class="product-card-container">
+          <div class="card-face" style="position: relative;">
+            <div class="card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&auto=format&fit=crop&q=80" alt="Hyderabadi Chicken Dum Biryani" loading="lazy">
+              <div class="diet-indicator non-veg" title="Non-Vegetarian"><div class="diet-circle"></div></div>
+              <div class="card-badge-tag">#1 Bestseller</div>
+            </div>
+            <div class="card-body">
+              <div class="card-meta-row">
+                <div class="card-rating"><i class="fa-solid fa-star"></i> <span>4.9</span> <span class="card-rating-count">(1,420 ratings)</span></div>
+                <div class="card-spice"><i class="fa-solid fa-pepper-hot" style="color:var(--gold-accent);"></i> Spicy</div>
+              </div>
+              <h3 class="card-title"><a href="product.html?id=anu-001" style="color:#ffffff; text-decoration:none;">Hyderabadi Chicken Dum Biryani</a></h3>
+              <p class="card-short-desc">Royal aged Daawat basmati rice slow-cooked with fresh tender farm chicken marinated overnight in Kashmiri saffron, golden birista, and pure cow ghee sealed in a clay handi.</p>
+              <div class="card-molecules-strip">
+                <span class="card-mol-tag"><i class="fa-solid fa-leaf"></i> No Preservatives</span>
+                <span class="card-mol-tag"><i class="fa-solid fa-certificate"></i> 100% Halal</span>
+                <span class="card-mol-tag"><i class="fa-solid fa-droplet-slash"></i> No Colors</span>
+              </div>
+              <div class="card-price-serving-row">
+                <div class="price-group">
+                  <span class="current-price">₹290</span>
+                  <span class="original-price">₹350</span>
+                  <span style="font-size:0.75rem; color:var(--veg-color); font-weight:700;">17% OFF</span>
+                </div>
+                <span class="serving-tag"><i class="fa-regular fa-user"></i> Serves 1-2 (600g)</span>
+              </div>
+              <div class="card-actions-row">
+                <a href="product.html?id=anu-001" class="btn-inspect-modal" style="text-decoration:none;">
+                  <i class="fa-solid fa-sparkles"></i> Details & Ingredients (Amazon View)
+                </a>
+              </div>
+              <div class="card-actions-bottom-row">
+                <button type="button" class="btn-add-cart" data-id="anu-001">
+                  <i class="fa-solid fa-bag-shopping"></i> + Add to Basket
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Dietary Switchers -->
-        <div class="dietary-tabs">
-          <button class="diet-btn active" data-diet="all">
-            <i class="fa-solid fa-utensils"></i> All Items
-          </button>
-          <button class="diet-btn non-veg" data-diet="non-veg">
-            <span class="diet-dot non-veg-dot"></span> Non-Veg Only
-          </button>
-          <button class="diet-btn veg" data-diet="veg">
-            <span class="diet-dot veg-dot"></span> Veg Only
-          </button>
+        <!-- Signature Dish 2 -->
+        <div class="product-card-container">
+          <div class="card-face" style="position: relative;">
+            <div class="card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1697155406147-7d640cbba0e7?w=900&auto=format&fit=crop&q=80" alt="Tandoori Murgh (Full Roast)" loading="lazy">
+              <div class="diet-indicator non-veg" title="Non-Vegetarian"><div class="diet-circle"></div></div>
+              <div class="card-badge-tag">Chef's Special</div>
+            </div>
+            <div class="card-body">
+              <div class="card-meta-row">
+                <div class="card-rating"><i class="fa-solid fa-star"></i> <span>4.8</span> <span class="card-rating-count">(980 ratings)</span></div>
+                <div class="card-spice"><i class="fa-solid fa-pepper-hot" style="color:var(--gold-accent);"></i> Medium</div>
+              </div>
+              <h3 class="card-title"><a href="product.html?id=anu-002" style="color:#ffffff; text-decoration:none;">Tandoori Murgh (Full Roast)</a></h3>
+              <p class="card-short-desc">Full tender spring chicken marinated in hung curd, Deghi mirch, smoked mustard oil, and freshly pounded garam masala, skewered and roasted to perfection over hot coals.</p>
+              <div class="card-molecules-strip">
+                <span class="card-mol-tag"><i class="fa-solid fa-leaf"></i> No Preservatives</span>
+                <span class="card-mol-tag"><i class="fa-solid fa-certificate"></i> 100% Halal</span>
+                <span class="card-mol-tag"><i class="fa-solid fa-fire"></i> Charcoal Smoked</span>
+              </div>
+              <div class="card-price-serving-row">
+                <div class="price-group">
+                  <span class="current-price">₹440</span>
+                  <span class="original-price">₹520</span>
+                  <span style="font-size:0.75rem; color:var(--veg-color); font-weight:700;">15% OFF</span>
+                </div>
+                <span class="serving-tag"><i class="fa-regular fa-user"></i> Serves 3-4 (Full)</span>
+              </div>
+              <div class="card-actions-row">
+                <a href="product.html?id=anu-002" class="btn-inspect-modal" style="text-decoration:none;">
+                  <i class="fa-solid fa-sparkles"></i> Details & Ingredients (Amazon View)
+                </a>
+              </div>
+              <div class="card-actions-bottom-row">
+                <button type="button" class="btn-add-cart" data-id="anu-002">
+                  <i class="fa-solid fa-bag-shopping"></i> + Add to Basket
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Sort Select -->
-        <div class="sort-box">
-          <label for="sortSelect"><i class="fa-solid fa-arrow-down-short-wide"></i> Sort:</label>
-          <select id="sortSelect">
-            <option value="featured">Featured Special</option>
-            <option value="rating-high">Highest Rated ★</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-          </select>
+        <!-- Signature Dish 3 -->
+        <div class="product-card-container">
+          <div class="card-face" style="position: relative;">
+            <div class="card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=900&auto=format&fit=crop&q=80" alt="Royal Mutton Rogan Josh" loading="lazy">
+              <div class="diet-indicator non-veg" title="Non-Vegetarian"><div class="diet-circle"></div></div>
+              <div class="card-badge-tag">Royal Classic</div>
+            </div>
+            <div class="card-body">
+              <div class="card-meta-row">
+                <div class="card-rating"><i class="fa-solid fa-star"></i> <span>4.9</span> <span class="card-rating-count">(760 ratings)</span></div>
+                <div class="card-spice"><i class="fa-solid fa-pepper-hot" style="color:var(--gold-accent);"></i> Medium</div>
+              </div>
+              <h3 class="card-title"><a href="product.html?id=anu-003" style="color:#ffffff; text-decoration:none;">Royal Mutton Rogan Josh</a></h3>
+              <p class="card-short-desc">Signature Kashmiri mutton curry cooked with tender baby goat pieces in an aromatic gravy infused with Ratanjot, fennel seeds, dry ginger, and slow-braised caramelized onions.</p>
+              <div class="card-molecules-strip">
+                <span class="card-mol-tag"><i class="fa-solid fa-leaf"></i> No Preservatives</span>
+                <span class="card-mol-tag"><i class="fa-solid fa-certificate"></i> Prime Goat</span>
+                <span class="card-mol-tag"><i class="fa-solid fa-mortar-pestle"></i> Kashmiri Herbs</span>
+              </div>
+              <div class="card-price-serving-row">
+                <div class="price-group">
+                  <span class="current-price">₹410</span>
+                  <span class="original-price">₹480</span>
+                  <span style="font-size:0.75rem; color:var(--veg-color); font-weight:700;">15% OFF</span>
+                </div>
+                <span class="serving-tag"><i class="fa-regular fa-user"></i> Serves 2 (450g)</span>
+              </div>
+              <div class="card-actions-row">
+                <a href="product.html?id=anu-003" class="btn-inspect-modal" style="text-decoration:none;">
+                  <i class="fa-solid fa-sparkles"></i> Details & Ingredients (Amazon View)
+                </a>
+              </div>
+              <div class="card-actions-bottom-row">
+                <button type="button" class="btn-add-cart" data-id="anu-003">
+                  <i class="fa-solid fa-bag-shopping"></i> + Add to Basket
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
 
-      <!-- Category Filter Pills -->
-      <div class="category-pills" id="categoryPills">
-        <button class="category-pill active" data-category="all">
-          <i class="fa-solid fa-layer-group"></i> All Specials (<span id="count-all">0</span>)
-        </button>
-        <button class="category-pill" data-category="biryani">
-          🍗 Biryani & Rice (<span id="count-biryani">0</span>)
-        </button>
-        <button class="category-pill" data-category="starters">
-          🔥 Tandoor & Starters (<span id="count-starters">0</span>)
-        </button>
-        <button class="category-pill" data-category="curries">
-          🍲 Royal Curries (<span id="count-curries">0</span>)
-        </button>
-        <button class="category-pill" data-category="seafood">
-          🦐 Seafood Specials (<span id="count-seafood">0</span>)
-        </button>
-        <button class="category-pill" data-category="breads">
-          🫓 Breads & Sides (<span id="count-breads">0</span>)
-        </button>
-        <button class="category-pill" data-category="desserts">
-          🍨 Desserts & Drinks (<span id="count-desserts">0</span>)
-        </button>
+      <!-- Direct Link to Cloud Kitchen Store Banner -->
+      <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(230, 81, 0, 0.12), rgba(245, 158, 11, 0.08)); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-xl);">
+        <h3 style="font-size: 1.45rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+          Craving More Royal Flavors?
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+          Explore our complete 10-dish cloud kitchen catalog with coastal seafood, tandoor starters, butter gravies, fresh naans, and royal desserts.
+        </p>
+        <a href="store.html" class="btn btn-primary btn-glow" style="padding: 0.95rem 2.25rem; font-size: 1.05rem;">
+          <i class="fa-solid fa-store"></i> Browse Full Online Store & Menu →
+        </a>
       </div>
 
-      <!-- Menu Grid: Populated dynamically with 3D Flip Cards -->
-      <div class="menu-grid" id="menuGrid">
-        <!-- Rendered via JavaScript -->
-      </div>
-
-      <!-- No items found alert -->
-      <div class="no-items-card hidden" id="noItemsState">
-        <i class="fa-solid fa-plate-wheat empty-icon"></i>
-        <h3>No delicious matches found</h3>
-        <p>Try clearing filters or search terms to browse the full culinary collection.</p>
-        <button class="btn btn-secondary" id="resetFiltersBtn">Reset Filters</button>
-      </div>
     </div>
   </section>
 
@@ -934,7 +1012,7 @@
             <div class="image-presets-strip">
               <span class="preset-label">Quick Presets:</span>
               <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80">Dum Biryani</button>
-              <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=800&auto=format&fit=crop&q=80">Tandoori Chicken</button>
+              <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1697155406147-7d640cbba0e7?w=800&auto=format&fit=crop&q=80">Tandoori Chicken</button>
               <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800&auto=format&fit=crop&q=80">Butter Chicken</button>
               <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80">Mutton Gravy</button>
               <button type="button" class="img-preset-btn" data-url="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop&q=80">Grilled Kebab</button>
