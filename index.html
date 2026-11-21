@@ -53,12 +53,6 @@
 
       <!-- Nav Actions -->
       <div class="nav-actions">
-        <!-- Admin Access Button -->
-        <button class="btn-admin-portal" id="adminPortalBtn" title="Hotel Management & Inventory">
-          <i class="fa-solid fa-sliders"></i>
-          <span>Admin Portal</span>
-        </button>
-
         <!-- Cart Trigger Button -->
         <button class="btn-cart" id="cartToggleBtn" aria-label="Open Shopping Cart">
           <i class="fa-solid fa-basket-shopping"></i>
@@ -91,7 +85,6 @@
       <a href="#about" class="mob-link"><i class="fa-solid fa-crown"></i> Royal Heritage</a>
       <a href="#reviews" class="mob-link"><i class="fa-solid fa-star"></i> Customer Reviews</a>
       <a href="#contact" class="mob-link"><i class="fa-solid fa-location-dot"></i> Find Hotel</a>
-      <button class="mob-admin-link" id="mobAdminBtn"><i class="fa-solid fa-sliders"></i> Open Admin Manager</button>
     </div>
     <div class="mobile-drawer-footer">
       <p><i class="fa-solid fa-phone"></i> Orders: +91 98765 43210</p>
@@ -130,9 +123,6 @@
           </a>
           <button class="btn btn-secondary" id="heroReviewsBtn">
             <i class="fa-solid fa-star"></i> Customer Ratings
-          </button>
-          <button class="btn btn-outline" id="heroAdminBtn">
-            <i class="fa-solid fa-shield-halved"></i> Owner Dashboard
           </button>
         </div>
 
@@ -255,11 +245,6 @@
             <option value="price-high">Price: High to Low</option>
           </select>
         </div>
-
-        <!-- Quick Add Item Button (Owner) -->
-        <button class="btn-quick-add" id="quickAddProductBtn">
-          <i class="fa-solid fa-plus-circle"></i> Add New Dish
-        </button>
       </div>
 
       <!-- Category Filter Pills -->
@@ -550,8 +535,8 @@
               <p>We use triple-layer insulated food-grade containers that seal in steam and aroma, guaranteeing your biryani and curries arrive hot within 30-40 minutes.</p>
             </details>
             <details class="faq-item">
-              <summary><strong>How do I add or edit items as the store owner?</strong></summary>
-              <p>Click on the <strong>"Admin Portal"</strong> in the top header or the "+ Add New Dish" button. You can add new dishes, adjust prices, toggle stock availability, and view live incoming orders in real time!</p>
+              <summary><strong>How do store managers update items and manage orders?</strong></summary>
+              <p>Hotel staff and managers can access our secure <a href="admin.html" style="color: var(--gold-accent); text-decoration: underline;">Staff Portal</a> via the direct link to update daily specials, adjust prices, toggle item availability, and track live incoming orders in real time.</p>
             </details>
             <details class="faq-item">
               <summary><strong>Can I order via WhatsApp?</strong></summary>
@@ -607,22 +592,22 @@
         </ul>
       </div>
 
+      <!-- Footer Column 4: Kitchen Timings & Direct Line -->
       <div class="footer-links-col">
-        <h4>Owner Tools</h4>
-        <p>Manage items, adjust prices & review orders:</p>
-        <button class="btn btn-outline btn-sm" id="footerAdminBtn">
-          <i class="fa-solid fa-sliders"></i> Open Admin Portal
-        </button>
+        <h4>Kitchen Hours</h4>
+        <p><i class="fa-regular fa-clock" style="color: var(--gold-accent);"></i> Mon – Sun: 11:30 AM – 11:30 PM</p>
+        <p><i class="fa-solid fa-motorcycle" style="color: var(--gold-accent);"></i> Direct Express Cloud Delivery</p>
+        <p><i class="fa-solid fa-phone" style="color: var(--gold-accent);"></i> Hotline: +91 98765 43210</p>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>© 2026 Anu Food Point Hotel. All Rights Reserved. Crafted for food lovers.</p>
-        <p class="footer-badges">
+        <p>© 2026 Anu Food Point Hotel. All Rights Reserved. • <a href="admin.html" class="staff-portal-link" title="Staff & Management Access">Staff Portal</a></p>
+        <div class="footer-badges">
           <span><i class="fa-solid fa-shield-halved"></i> FSSAI Certified Kitchen</span>
           <span><i class="fa-solid fa-lock"></i> 100% Secure Checkout</span>
-        </p>
+        </div>
       </div>
     </div>
   </footer>
@@ -1052,10 +1037,10 @@
       <i class="fa-solid fa-star"></i>
       <span>Reviews</span>
     </a>
-    <button class="mob-bottom-item" id="mobBottomAdminBtn">
-      <i class="fa-solid fa-sliders"></i>
-      <span>Admin</span>
-    </button>
+    <a href="#contact" class="mob-bottom-item">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>Location</span>
+    </a>
   </div>
 
   <!-- Notification Toast Container -->
