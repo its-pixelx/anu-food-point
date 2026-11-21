@@ -1,6 +1,14 @@
 # Anu Food Point Hotel 🍗👑
 > **Authentic Royal Flavors, Signature Non-Veg Dum Delicacies & Modern Cloud Kitchen**
 
+[![Live Demo](https://img.shields.io/badge/Live_Website-GitHub_Pages-2ea44f?style=for-the-badge&logo=github)](https://its-pixelx.github.io/anu-food-point/)
+[![GitHub Repo](https://img.shields.io/badge/Repository-anu--food--point-blue?style=for-the-badge&logo=github)](https://github.com/its-pixelx/anu-food-point)
+
+🌐 **Live Website Link:**  
+👉 **[https://its-pixelx.github.io/anu-food-point/](https://its-pixelx.github.io/anu-food-point/)**
+
+---
+
 An official, responsive front-end website for **Anu Food Point Hotel** — built with modern web technologies, 3D interactive card flip animations, Amazon-style verified customer reviews, dynamic shopping basket drawer, and a dedicated Store Owner Admin Portal.
 
 ---
@@ -57,18 +65,26 @@ An official, responsive front-end website for **Anu Food Point Hotel** — built
 
 ```text
 anu-food-point/
-├── index.html        # Main semantic, accessible front-end application
+├── .github/
+│   └── workflows/
+│       └── deploy-pages.yml  # Automated GitHub Actions deployment to GitHub Pages
+├── index.html                # Main semantic, accessible front-end application
 ├── css/
-│   └── styles.css    # Modern custom CSS with 3D flip mechanics, variables, and responsive layout
+│   └── styles.css            # Modern custom CSS with 3D flip mechanics, variables, and responsive layout
 ├── js/
-│   ├── data.js       # Default non-veg & veg culinary catalog with Amazon-style reviews
-│   ├── admin.js      # Hotel inventory, item creator, order tracker & analytics controller
-│   └── app.js        # Cart management, filters, checkout & WhatsApp integration
-└── README.md         # Documentation & setup guide
+│   ├── data.js               # Default non-veg & veg culinary catalog with Amazon-style reviews
+│   ├── admin.js              # Hotel inventory, item creator, order tracker & analytics controller
+│   └── app.js                # Cart management, filters, checkout & WhatsApp integration
+└── README.md                 # Documentation & setup guide
 ```
 
 ---
 
-## 🚀 How to Run
+## 🌐 GitHub Pages Deployment
 
-Open `index.html` in any modern web browser or serve locally.
+This project includes a pre-configured GitHub Actions workflow (`.github/workflows/deploy-pages.yml`) that automatically builds and deploys the website to GitHub Pages on every commit to `main`.
+
+To verify your Pages setting in the repository:
+1. Go to **Settings** → **Pages** on your repository: [https://github.com/its-pixelx/anu-food-point/settings/pages](https://github.com/its-pixelx/anu-food-point/settings/pages)
+2. Under **Build and deployment > Source**, select **GitHub Actions** (or select **Deploy from a branch** and choose `main` / `root`).
+3. Your site is live at: **[https://its-pixelx.github.io/anu-food-point/](https://its-pixelx.github.io/anu-food-point/)**
