@@ -988,6 +988,11 @@ img {
   user-select: none;
 }
 
+.category-pill span {
+  display: inline !important;
+  white-space: nowrap !important;
+}
+
 .category-pill:hover {
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.25);
@@ -1342,10 +1347,6 @@ img {
   background: linear-gradient(135deg, var(--primary-hover), var(--primary-accent));
   box-shadow: 0 6px 16px rgba(230, 81, 0, 0.45);
   transform: translateY(-1px);
-}
-
-.btn-add-cart:hover {
-  background: linear-gradient(135deg, var(--primary-hover), var(--primary-accent));
 }
 
 /* Back Face (Flip Details & Amazon Reviews) */
