@@ -18,6 +18,7 @@ const AppController = {
     this.reloadProducts();
     this.bindEvents();
     this.initMobileNav();
+    this.initFilterArrows();
   },
 
   cacheDom() {
@@ -305,6 +306,46 @@ const AppController = {
     }
   },
 
+  initFilterArrows() {
+    const filterScroll = document.getElementById("categoryScroll");
+    const leftBtn = document.getElementById("filterScrollLeft");
+    const rightBtn = document.getElementById("filterScrollRight");
+
+    if (!filterScroll || !leftBtn || !rightBtn) return;
+
+    const updateArrows = () => {
+      const scrollLeft = filterScroll.scrollLeft;
+      const maxScroll = filterScroll.scrollWidth - filterScroll.clientWidth;
+
+      if (scrollLeft > 8) {
+        leftBtn.style.opacity = "1";
+        leftBtn.style.pointerEvents = "auto";
+      } else {
+        leftBtn.style.opacity = "0.35";
+        leftBtn.style.pointerEvents = "none";
+      }
+
+      if (scrollLeft < maxScroll - 8) {
+        rightBtn.style.opacity = "1";
+        rightBtn.style.pointerEvents = "auto";
+      } else {
+        rightBtn.style.opacity = "0.35";
+        rightBtn.style.pointerEvents = "none";
+      }
+    };
+
+    leftBtn.addEventListener("click", () => {
+      filterScroll.scrollBy({ left: -180, behavior: "smooth" });
+    });
+    rightBtn.addEventListener("click", () => {
+      filterScroll.scrollBy({ left: 180, behavior: "smooth" });
+    });
+
+    filterScroll.addEventListener("scroll", updateArrows);
+    window.addEventListener("resize", updateArrows);
+    setTimeout(updateArrows, 200);
+  },
+
   reloadProducts() {
     this.products = getStoredProducts();
     this.updateCategoryCounts();
@@ -394,7 +435,7 @@ const AppController = {
         ];
 
     return `
-      <div class="product-card-container" id="card-${item.id}">
+      <div class="product-card-container animate-in" id="card-${item.id}">
         <div class="product-card-inner">
           
           <!-- FRONT FACE -->
