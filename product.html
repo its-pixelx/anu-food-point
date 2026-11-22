@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1117">
   <title>Dish Details & Ingredients | Anu Food Point Hotel</title>
   <meta name="description" content="Inspect authentic non-veg dum delicacies, whole spices, zero preservatives guarantee, and Amazon-verified customer reviews at Anu Food Point Hotel.">
   
@@ -12,11 +13,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Stylesheets (Versioned Cache-Buster) -->
+  <link rel="stylesheet" href="css/base.css?v=3.5">
+  <link rel="stylesheet" href="css/components.css?v=3.5">
+  <link rel="stylesheet" href="css/responsive.css?v=3.5">
   <style>
     .product-page-main {
       padding: 1.5rem 0 5rem 0;
@@ -91,8 +91,8 @@
 
       <!-- Nav Actions -->
       <div class="nav-actions">
-        <a href="store.html" class="btn btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;">
-          <i class="fa-solid fa-store"></i> <span class="desk-only">Menu Store</span>
+        <a href="store.html" class="btn btn-secondary desk-only" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+          <i class="fa-solid fa-store"></i> <span>Menu Store</span>
         </a>
         <button class="btn-cart" id="cartToggleBtn" aria-label="Open Basket">
           <i class="fa-solid fa-basket-shopping"></i>
@@ -404,15 +404,15 @@
       document.getElementById("productPageContent").innerHTML = `
         <div class="amazon-sheet-container" style="max-height: none;">
           <!-- Top Navigation Bar & Amazon Badge -->
-          <div class="amazon-top-bar" style="padding-right: 2rem;">
+          <div class="amazon-top-bar">
             <nav class="amazon-breadcrumb">
-              <a href="index.html" class="bc-link">Home</a>
+              <a href="index.html" class="bc-link"><i class="fa-solid fa-house"></i> Home</a>
               <span class="bc-sep">›</span>
               <a href="store.html" class="bc-link">Store</a>
               <span class="bc-sep">›</span>
               <span class="bc-cat">${(item.category || "specials").toUpperCase()}</span>
-              <span class="bc-sep">›</span>
-              <span class="bc-active">${item.name}</span>
+              <span class="bc-sep desk-only">›</span>
+              <span class="bc-active desk-only">${item.name}</span>
             </nav>
             ${item.amazonChoice ? `<span class="amazon-choice-pill"><i class="fa-solid fa-award"></i> ${item.amazonChoice}</span>` : `<span class="amazon-choice-pill"><i class="fa-solid fa-crown"></i> Chef's Gold Choice</span>`}
           </div>
