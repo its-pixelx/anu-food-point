@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1117">
   <title>Online Cloud Kitchen Store | Anu Food Point Hotel</title>
   <meta name="description" content="Order authentic clay pot dum biryanis, fiery tandoori roasts, and gourmet non-veg curries online from Anu Food Point Cloud Kitchen. 30-min express city delivery.">
   
@@ -12,11 +13,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Stylesheets (Versioned Cache-Buster) -->
+  <link rel="stylesheet" href="css/base.css?v=3.5">
+  <link rel="stylesheet" href="css/components.css?v=3.5">
+  <link rel="stylesheet" href="css/responsive.css?v=3.5">
   <style>
     .store-hero-header {
       padding: 2rem 0 1.5rem;
@@ -30,6 +30,16 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1.25rem;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    .store-intro-text {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
     .store-badge-strip {
       display: flex;
@@ -152,7 +162,7 @@
   <section class="store-hero-header">
     <div class="container">
       <div class="store-header-inner">
-        <div>
+        <div class="store-intro-text">
           <a href="index.html" class="store-nav-back" style="margin-bottom: 0.75rem;">
             <i class="fa-solid fa-arrow-left"></i> Hotel Home & Showcase
           </a>
@@ -210,28 +220,38 @@
           </div>
         </div>
 
-        <!-- Category Filter Pills Strip (Scrollbar completely hidden) -->
-        <div class="category-pills" role="tablist">
-          <button class="category-pill active" data-category="all" role="tab">
-            <i class="fa-solid fa-layer-group"></i> All Specials (<span id="count-all">10</span>)
+        <!-- Category Filter Pills Strip with Heritage Arrow Controls -->
+        <div class="filter-scroll-wrapper">
+          <button class="scroll-arrow-btn" id="filterScrollLeft" aria-label="Scroll left" style="opacity: 0.35; pointer-events: none;">
+            <i class="fa-solid fa-chevron-left"></i>
           </button>
-          <button class="category-pill" data-category="biryani" role="tab">
-            <i class="fa-solid fa-drumstick-bite"></i> Biryani & Rice (<span id="count-biryani">2</span>)
-          </button>
-          <button class="category-pill" data-category="starters" role="tab">
-            <i class="fa-solid fa-fire"></i> Tandoor & Starters (<span id="count-starters">2</span>)
-          </button>
-          <button class="category-pill" data-category="curries" role="tab">
-            <i class="fa-solid fa-bowl-rice"></i> Royal Curries (<span id="count-curries">3</span>)
-          </button>
-          <button class="category-pill" data-category="seafood" role="tab">
-            <i class="fa-solid fa-shrimp"></i> Coastal Seafood (<span id="count-seafood">1</span>)
-          </button>
-          <button class="category-pill" data-category="breads" role="tab">
-            <i class="fa-solid fa-bread-slice"></i> Tandoori Breads (<span id="count-breads">1</span>)
-          </button>
-          <button class="category-pill" data-category="desserts" role="tab">
-            <i class="fa-solid fa-ice-cream"></i> Royal Desserts (<span id="count-desserts">1</span>)
+
+          <div class="category-pills filter-scroll" id="categoryScroll" role="tablist">
+            <button class="category-pill active" data-category="all" role="tab">
+              <i class="fa-solid fa-layer-group"></i> All Specials (<span id="count-all">10</span>)
+            </button>
+            <button class="category-pill" data-category="biryani" role="tab">
+              <i class="fa-solid fa-drumstick-bite"></i> Biryani & Rice (<span id="count-biryani">2</span>)
+            </button>
+            <button class="category-pill" data-category="starters" role="tab">
+              <i class="fa-solid fa-fire"></i> Tandoor & Starters (<span id="count-starters">2</span>)
+            </button>
+            <button class="category-pill" data-category="curries" role="tab">
+              <i class="fa-solid fa-bowl-rice"></i> Royal Curries (<span id="count-curries">3</span>)
+            </button>
+            <button class="category-pill" data-category="seafood" role="tab">
+              <i class="fa-solid fa-shrimp"></i> Coastal Seafood (<span id="count-seafood">1</span>)
+            </button>
+            <button class="category-pill" data-category="breads" role="tab">
+              <i class="fa-solid fa-bread-slice"></i> Tandoori Breads (<span id="count-breads">1</span>)
+            </button>
+            <button class="category-pill" data-category="desserts" role="tab">
+              <i class="fa-solid fa-ice-cream"></i> Royal Desserts (<span id="count-desserts">1</span>)
+            </button>
+          </div>
+
+          <button class="scroll-arrow-btn hint-arrow-right" id="filterScrollRight" aria-label="Scroll right">
+            <i class="fa-solid fa-chevron-right"></i>
           </button>
         </div>
       </div>
@@ -491,6 +511,36 @@
       </div>
     </div>
   </footer>
+
+  <!-- Bottom Floating Navigation for Mobile -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html" class="mob-bottom-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="store.html" class="mob-bottom-item active">
+      <i class="fa-solid fa-bowl-food"></i>
+      <span>Store</span>
+    </a>
+    <button class="mob-bottom-item mob-cart-trigger" id="mobBottomCartBtn">
+      <div class="icon-wrap">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <span class="badge" id="mobBottomCartCount">0</span>
+      </div>
+      <span>Cart</span>
+    </button>
+    <a href="index.html#reviews" class="mob-bottom-item">
+      <i class="fa-solid fa-star"></i>
+      <span>Reviews</span>
+    </a>
+    <a href="index.html#contact" class="mob-bottom-item">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>Location</span>
+    </a>
+  </div>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
 
   <!-- Scripts -->
   <script src="js/data.js"></script>
