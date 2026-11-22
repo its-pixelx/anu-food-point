@@ -45,6 +45,9 @@
   --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Native Smooth Cross-Document Transitions (Zero White Flash) */
+@view-transition { navigation: auto; }
+
 /* Base Reset */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -55,6 +58,10 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -63,6 +70,8 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -118,30 +127,40 @@ img {
 .announcement-bar {
   background: linear-gradient(90deg, #b43800, #d95a00, #b43800);
   color: #ffffff;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 0.5rem 1rem;
-  overflow: hidden;
+  padding: 0.45rem 1rem;
   position: relative;
-  z-index: 101;
+  z-index: 910;
+  min-height: 34px;
+  height: auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .announcement-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.85rem;
   flex-wrap: wrap;
   text-align: center;
+  line-height: 1.35;
+  width: 100%;
 }
 
 .badge-fire {
   background-color: rgba(0, 0, 0, 0.35);
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-full);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .separator {
@@ -878,24 +897,78 @@ img {
   color: #000000;
 }
 
-/* Category Filter Pills */
-.category-pills {
+/* ==========================================================================
+   Category Filter Pills Strip (with Heritage Navigation Controls)
+   ========================================================================== */
+.filter-scroll-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.category-pills, .filter-scroll {
   display: flex;
   align-items: center;
   gap: 0.65rem;
   overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 0.75rem;
-  margin-bottom: 2.5rem;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
-  -webkit-overflow-scrolling: touch;
+  padding: 4px 6px;
+  flex: 1;
+  scroll-behavior: smooth;
+  margin-bottom: 0 !important;
 }
 
-.category-pills::-webkit-scrollbar {
+.category-pills::-webkit-scrollbar,
+.filter-scroll::-webkit-scrollbar {
   display: none !important;
   width: 0 !important;
   height: 0 !important;
+}
+
+.scroll-arrow-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--gold-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+.scroll-arrow-btn:hover {
+  background: var(--primary-accent);
+  border-color: var(--primary-accent);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.scroll-arrow-btn:active {
+  transform: scale(0.92);
+}
+
+@keyframes arrowHintRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+.hint-arrow-right {
+  animation: arrowHintRight 2.2s infinite ease-in-out;
+}
+.hint-arrow-right:hover {
+  animation: none;
 }
 
 .category-pill {
@@ -910,11 +983,19 @@ img {
   display: flex;
   align-items: center;
   gap: 0.45rem;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
 }
 
 .category-pill:hover {
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.category-pill:active {
+  transform: scale(0.96);
 }
 
 .category-pill.active {
@@ -925,8 +1006,33 @@ img {
 }
 
 /* ==========================================================================
-   3D Flip Product Cards & Grid
+   3D Flip Product Cards & Grid Animations
    ========================================================================== */
+@keyframes cardPopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  65% {
+    opacity: 0.98;
+    transform: translateY(-2px) scale(1.004);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.product-card-container.animate-in {
+  animation: cardPopIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card-container.animate-in {
+    animation: none !important;
+  }
+}
+
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1236,6 +1342,10 @@ img {
   background: linear-gradient(135deg, var(--primary-hover), var(--primary-accent));
   box-shadow: 0 6px 16px rgba(230, 81, 0, 0.45);
   transform: translateY(-1px);
+}
+
+.btn-add-cart:hover {
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary-accent));
 }
 
 /* Back Face (Flip Details & Amazon Reviews) */
