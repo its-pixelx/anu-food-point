@@ -15,11 +15,15 @@
   display: flex;
   flex-direction: column;
   box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
-  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .cart-drawer.active {
   right: 0;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .cart-drawer-header {
@@ -407,6 +411,19 @@
   color: var(--nonveg-color);
 }
 
+.btn-clear-cart {
+  width: 100%;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  margin-top: 0.65rem;
+  padding: 0.35rem 0;
+}
+
+.btn-clear-cart:hover {
+  color: var(--nonveg-color);
+}
+
 /* ==========================================================================
    Modals & Backdrop
    ========================================================================== */
@@ -731,12 +748,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.15rem 2rem 0.85rem 2rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.02);
   flex-wrap: wrap;
   gap: 0.75rem;
-  padding-right: 4.5rem;
 }
 
 .amazon-breadcrumb {
@@ -1896,12 +1912,16 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  transition: left 0.35s ease;
+  transition: left 0.35s ease, visibility 0.35s;
   padding: 1.5rem;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .mobile-drawer.active {
   left: 0;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-drawer-header {
