@@ -19,6 +19,7 @@ const AppController = {
     this.bindEvents();
     this.initMobileNav();
     this.initFilterArrows();
+    this.attachCardEventListeners();
   },
 
   cacheDom() {
@@ -93,6 +94,19 @@ const AppController = {
   },
 
   bindEvents() {
+    // Global delegated click listener for all Add to Basket / Cart buttons
+    document.addEventListener("click", (e) => {
+      const addBtn = e.target.closest(".btn-add-cart, .btn-add-food, .btn-add-basket");
+      if (addBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = addBtn.getAttribute("data-id");
+        if (id) {
+          this.addToCart(id);
+        }
+      }
+    });
+
     // Search input
     if (this.menuSearchInput) {
       this.menuSearchInput.addEventListener("input", (e) => {
@@ -982,8 +996,14 @@ const AppController = {
   },
 
   addToCart(productId) {
+    if (!this.products || this.products.length === 0) {
+      this.products = getStoredProducts();
+    }
     const product = this.products.find(p => p.id === productId);
-    if (!product) return;
+    if (!product) {
+      console.warn("Product not found:", productId);
+      return;
+    }
 
     if (product.active === false) {
       this.showToast("Sorry, this dish is currently out of stock.", "error");
@@ -1009,12 +1029,30 @@ const AppController = {
     this.updateCartUi();
     this.showToast(`Added 1× "${product.name}" to your basket!`, "success");
 
-    // Optional quick bump animation on cart button
+    // Instant Visual Feedback on clicked button
+    const btns = document.querySelectorAll(`[data-id="${productId}"].btn-add-cart, .btn-add-cart[data-id="${productId}"]`);
+    btns.forEach(btn => {
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = `<i class="fa-solid fa-check"></i> Added!`;
+      btn.classList.add("btn-added-success");
+      setTimeout(() => {
+        btn.innerHTML = origHtml;
+        btn.classList.remove("btn-added-success");
+      }, 1200);
+    });
+
+    // Bump animation on cart button
     if (this.cartToggleBtn) {
-      this.cartToggleBtn.style.transform = "scale(1.1)";
+      this.cartToggleBtn.style.transform = "scale(1.15)";
       setTimeout(() => {
         this.cartToggleBtn.style.transform = "";
-      }, 200);
+      }, 250);
+    }
+    if (this.mobBottomCartBtn) {
+      this.mobBottomCartBtn.style.transform = "scale(1.15)";
+      setTimeout(() => {
+        this.mobBottomCartBtn.style.transform = "";
+      }, 250);
     }
   },
 
@@ -1153,13 +1191,14 @@ const AppController = {
   },
 
   closeCart() {
-    this.cartDrawer.classList.remove("active");
+    if (this.cartDrawer) this.cartDrawer.classList.remove("active");
     const adminActive = typeof AdminController !== "undefined" && AdminController.adminModal && AdminController.adminModal.classList.contains("active");
-    if (!this.checkoutModal.classList.contains("active") && 
-        !this.orderSuccessModal.classList.contains("active") && 
-        !this.mobileDrawer.classList.contains("active") && 
-        !adminActive) {
-      this.backdrop.classList.remove("active");
+    const checkoutActive = this.checkoutModal && this.checkoutModal.classList.contains("active");
+    const successActive = this.orderSuccessModal && this.orderSuccessModal.classList.contains("active");
+    const mobDrawerActive = this.mobileDrawer && this.mobileDrawer.classList.contains("active");
+
+    if (!checkoutActive && !successActive && !mobDrawerActive && !adminActive) {
+      if (this.backdrop) this.backdrop.classList.remove("active");
       document.body.style.overflow = "";
     }
   },
