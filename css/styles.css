@@ -2,6 +2,6 @@
    Anu Food Point Hotel - Main Unified Stylesheet
    Modular imports for rapid HTTP/2 parallel caching and maintainability
    ========================================================================== */
-@import url('base.css?v=3.6');
-@import url('components.css?v=3.6');
-@import url('responsive.css?v=3.6');
+@import url('base.css?v=3.7');
+@import url('components.css?v=3.7');
+@import url('responsive.css?v=3.7');
