@@ -172,7 +172,9 @@ const AppController = {
         this.closeCheckout();
         this.closeSuccessModal();
         this.closeMobileDrawer();
-        AdminController.closeModal();
+        if (typeof AdminController !== "undefined" && typeof AdminController.closeModal === "function") {
+          AdminController.closeModal();
+        }
       });
     }
 
@@ -1111,10 +1113,11 @@ const AppController = {
 
   closeCart() {
     this.cartDrawer.classList.remove("active");
+    const adminActive = typeof AdminController !== "undefined" && AdminController.adminModal && AdminController.adminModal.classList.contains("active");
     if (!this.checkoutModal.classList.contains("active") && 
         !this.orderSuccessModal.classList.contains("active") && 
         !this.mobileDrawer.classList.contains("active") && 
-        !AdminController.adminModal.classList.contains("active")) {
+        !adminActive) {
       this.backdrop.classList.remove("active");
       document.body.style.overflow = "";
     }
@@ -1141,7 +1144,8 @@ const AppController = {
 
   closeCheckout() {
     this.checkoutModal.classList.remove("active");
-    if (!this.cartDrawer.classList.contains("active") && !AdminController.adminModal.classList.contains("active")) {
+    const adminActive = typeof AdminController !== "undefined" && AdminController.adminModal && AdminController.adminModal.classList.contains("active");
+    if (!this.cartDrawer.classList.contains("active") && !adminActive) {
       this.backdrop.classList.remove("active");
       document.body.style.overflow = "";
     }
@@ -1310,5 +1314,7 @@ const AppController = {
 // Start application when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   AppController.init();
-  AdminController.init();
+  if (typeof AdminController !== "undefined" && typeof AdminController.init === "function") {
+    AdminController.init();
+  }
 });
